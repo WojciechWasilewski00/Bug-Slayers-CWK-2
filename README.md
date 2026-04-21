@@ -69,3 +69,18 @@ Includes:
 ```bash
 git clone https://github.com/WojciechWasilewski00/Bug-Slayers-CWK-2.git
 cd Bug-Slayers-CWK-2
+
+## How to upload to git
+In group projects, always follow this "Golden Rule" to avoid these errors:
+
+git pull (Start your day by getting the team's work).
+
+Code (Do your amazing scheduling work).
+
+git add .
+
+git commit
+
+git pull (One last check to see if anyone pushed while you were coding).
+
+git push (Final upload).
