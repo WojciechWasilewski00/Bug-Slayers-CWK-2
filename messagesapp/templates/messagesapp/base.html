@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            max-width: 920px; /* slightly smaller than before */
+            margin: 80px auto 35px auto;
+            padding: 0 15px;
+        }
+
+        .tabs-bar {
+            border: 3px solid black;
+            background-color: #c7e0f2;
+            padding: 10px 12px; /* reduced */
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 18px; /* less gap */
+        }
+
+        .tab-link {
+            display: inline-block;
+            min-width: 140px;
+            text-align: center;
+            padding: 8px 14px;
+            background-color: #1e3a8a; /* dark blue */
+            border: 3px solid black;
+            color: white; /* white text */
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        
+        .tab-link:hover {
+            background-color: #162d6b; /* darker on hover */
+        }
+
+        .content-panel {
+            border: 4px solid black;
+            background-color: #c7e0f2;
+            padding: 25px 22px; /* reduced */
+            min-height: 380px; /* slightly smaller */
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 32px; /* slightly smaller */
+            color: black;
+        }
+
+        .message-card {
+            background-color: #d9ecf7;
+            border: 3px solid black;
+            padding: 14px 16px; /* reduced */
+            margin-bottom: 14px;
+        }
+
+        .message-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: black;
+        }
+
+        .message-card p {
+            margin: 6px 0;
+            font-size: 15px;
+            color: black;
+        }
+
+        .message-form {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 120px 1fr; /* tighter */
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .form-row label {
+            font-weight: bold;
+            font-size: 16px;
+            padding: 6px 8px;
+            border: 3px solid black;
+            background-color: #d9ecf7;
+            text-align: center;
+        }
+
+        .message-form input,
+        .message-form select,
+        .message-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 3px solid black;
+            background-color: white;
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+        .message-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            border: 3px solid black;
+            background-color: #1e3a8a; /* dark blue */
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        
+        button:hover {
+            background-color: #162d6b;
+        }
+
+        .success-message {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div class="tabs-bar">
+            <a href="/messages/new-message/" class="tab-link">New Message</a>
+            <a href="/messages/inbox/" class="tab-link">Inbox</a>
+            <a href="/messages/sent/" class="tab-link">Sent</a>
+            <a href="/messages/drafts/" class="tab-link">Drafts</a>
+        </div>
+
+        <div class="content-panel">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+
+</body>
+</html>

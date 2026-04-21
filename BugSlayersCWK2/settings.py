@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'team_registry',
     'scheduling',  # Jayne's app
+    'messagesapp', # Mariam' s app
 ]
 
 MIDDLEWARE = [
