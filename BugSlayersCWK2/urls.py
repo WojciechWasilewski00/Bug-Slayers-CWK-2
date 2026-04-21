@@ -23,8 +23,10 @@ def home(request):
     return HttpResponse("Welcome to the Home Page!")
 
 
+from django.contrib import admin
+from django.urls import path, include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-   # path('', home, name='home'),
-    # path('messages/', include('messages.urls')),
+    path('', include('scheduling.urls')),
 ]

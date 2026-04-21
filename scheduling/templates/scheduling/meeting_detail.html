@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Meeting Details - {{ meeting.subject }}{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'weekly_schedule' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page text-muted">Meeting Details</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h3 class="mb-0 fw-bold text-dark">{{ meeting.subject }}</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <label class="text-muted small text-uppercase fw-bold">Team</label>
+                            <p class="fs-5">{{ meeting.team.name }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="text-muted small text-uppercase fw-bold">Platform</label>
+                            <p><span class="badge bg-primary px-3 py-2">{{ meeting.platform }}</span></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <label class="text-muted small text-uppercase fw-bold">Date & Time</label>
+                            <p class="fs-5">📅 {{ meeting.date_time|date:"l, d F Y" }} at {{ meeting.date_time|date:"H:i" }}</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-muted opacity-25">
+
+                    <div class="mb-0">
+                        <label class="text-muted small text-uppercase fw-bold mb-2 d-block">Description / Agenda</label>
+                        <div class="p-3 bg-light rounded shadow-inner" style="min-height: 150px; border-left: 4px solid #0d6efd;">
+                            {{ meeting.description|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white py-3 border-top d-flex justify-content-between">
+                    <a href="{% url 'weekly_schedule' %}" class="btn btn-outline-secondary px-4">Back to List</a>
+                    <div>
+                        <a href="{% url 'edit_meeting' meeting.pk %}" class="btn btn-warning px-4">Edit</a>
+                        <a href="{% url 'delete_meeting' meeting.pk %}" class="btn btn-danger px-4 ms-2">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm bg-primary text-white">
+                <div class="card-body p-4">
+                    <h5>Meeting Status</h5>
+                    <p class="small opacity-75">This meeting is currently active in the schedule.</p>
+                    <hr class="opacity-25">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                👤
+                            </div>
+                        </div>
+                        <div class="ms-3">
+                            <p class="mb-0 small">Created by</p>
+                            <p class="mb-0 fw-bold">Admin User</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
