@@ -29,7 +29,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('teamapp.urls')), # Wojciech's path for team page
+    path('teams/<int:pk>/', views.team_detail, name='team_detail'), # Wojciech's path for team details
     path('', include('scheduling.urls')),
     path('messages/', include('messagesapp.urls')), # Mariam's path for Message 
 
 ]
+
