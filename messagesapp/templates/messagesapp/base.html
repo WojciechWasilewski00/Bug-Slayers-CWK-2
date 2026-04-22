@@ -343,8 +343,8 @@
             <a href="#"><span class="icon-wrapper">🏠</span> Dashboard</a>
 
             <div class="nav-section-title">Schedule</div>
-            <a href="" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">
-                <span class="icon-wrapper">📅</span> Weekly Schedule
+            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">📅</span> Weekly Schedule
+            
             </a>
             <a href="#">
                 <span class="icon-wrapper">➕</span> Schedule
