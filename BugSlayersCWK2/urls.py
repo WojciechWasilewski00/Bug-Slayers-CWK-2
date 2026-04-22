@@ -17,10 +17,22 @@ Including another URLconf
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
-from teamapp import views 
+from django.contrib.auth import views as auth_views
+
+
+def home(request):
+    return HttpResponse("Welcome to the Home Page!")
+
+
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('teamapp.urls')),
-    path('teams/<int:pk>/', views.team_detail, name='team_detail'),
+    path('', include('teamapp.urls')), # Wojciech's path for team page
+    path('teams/<int:pk>/', views.team_detail, name='team_detail'), # Wojciech's path for team details
+    path('', include('scheduling.urls')),
+    path('messages/', include('messagesapp.urls')), # Mariam's path for Message 
+
 ]
+

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4 fw-bold">{% if edit_mode %}Update Meeting{% else %}Create Meeting{% endif %}</h2>
+            
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-5">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">{{ field.label }}</label>
+                            {{ field }} {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a href="{% url 'weekly_schedule' %}" class="btn btn-light px-4">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-5" style="background-color: #0095ff; border: none;">
+                                {% if edit_mode %}Save Changes{% else %}Create Meeting{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling the Django form inputs to match Bootstrap */
+    input, select, textarea {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        color: #212529;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 0.5rem;
+        transition: border-color .15s ease-in-out;
+    }
+    input:focus {
+        border-color: #0095ff;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(0, 149, 255, 0.25);
+    }
+</style>
+{% endblock %}

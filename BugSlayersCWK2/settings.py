@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'teamapp',
-
+    'teamapp', # Wojciech's app
+    'team_registry',
+    'scheduling',  # Jayne's app
+    'messagesapp', # Mariam' s app
 ]
 
 MIDDLEWARE = [

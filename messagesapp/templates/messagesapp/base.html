@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Messages App{% endblock %}</title>
+
+    <!-- Google font used in the group design For the sidebar  -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================
+           MAIN COLOURS
+           ========================= */
+        :root {
+            --sidebar-bg: #ffffff;
+            --sidebar-text: #5a6a85;
+            --accent-blue: #5d87ff;    /* dark blue for top buttons */
+            --accent-blue-hover: #5d87ff;
+            --soft-blue: #c7e0f2;       /* light blue from your original UI */
+            --soft-blue-2: #d9ecf7;
+            --body-bg: #f4f7f6;
+            --panel-bg: #ffffff;
+            --border-light: #e5ecf6;
+            --heading-text: #2a3547;
+        }
+
+        /* =========================
+           GENERAL PAGE RESET
+           ========================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            background-color: var(--body-bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--heading-text);
+        }
+
+        /* =========================
+           SIDEBAR
+           This CSS is based in sidebar structure
+           ========================= */
+        .sidebar {
+            width: 270px;
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            border-right: 1px solid #eef2f6;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            padding: 30px 25px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--heading-text);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--heading-text);
+            text-transform: uppercase;
+            padding: 10px 25px;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            margin: 2px 15px;
+            display: flex;
+            align-items: center;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 7px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .sidebar a:hover {
+            background-color: #f6f9fc;
+            color: #5d87ff;
+        }
+
+        .sidebar a.active {
+            background-color: #ecf2ff;
+            color: #5d87ff;
+            font-weight: 600;
+        }
+
+        .icon-wrapper {
+            width: 30px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Push bottom admin/settings to the bottom */
+        .sidebar-bottom {
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+            padding-top: 12px;
+            padding-bottom: 18px;
+        }
+
+        /* =========================
+           MAIN CONTENT AREA
+           This is the center of the page
+           ========================= */
+        .main-content {
+            margin-left: 270px;
+            width: calc(100% - 270px);
+            padding: 40px;
+        }
+
+        .main-container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+           TOP HEADER CARD
+           This is the first card:
+           Contact Team + subtitle
+           ========================= */
+        .header-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+        }
+
+        .header-card h1 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--heading-text);
+        }
+
+        .header-card p {
+            margin: 8px 0 0 0;
+            font-size: 15px;
+            color: var(--sidebar-text);
+        }
+
+        /* =========================
+           TOP TABS CARD
+           This is your second card:
+           New Message / Inbox / Sent / Drafts
+           ========================= */
+        .tabs-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .tabs-bar {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab-link {
+            display: inline-block;
+            min-width: 145px;
+            text-align: center;
+            padding: 10px 16px;
+            background-color: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab-link:hover {
+            background-color: var(--accent-blue-hover);
+            color: white;
+        }
+
+        /* Active top tab */
+        .tab-link.active {
+            background-color: var(--accent-blue-hover);
+            color: white;
+        }
+
+        /* =========================
+           MAIN CONTENT CARD
+           This is the third card:
+           all page content goes here
+           ========================= */
+        .content-panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 28px;
+            min-height: 420px;
+        }
+
+        /* =========================
+           HEADINGS INSIDE CONTENT
+           ========================= */
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--heading-text);
+        }
+
+        /* =========================
+           MESSAGE CARDS
+           For  New message /inbox / sent / drafts 
+           ========================= */
+        .message-card {
+            background-color: var(--soft-blue-2);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+        }
+
+        .message-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: black;
+        }
+
+        .message-card p {
+            margin: 6px 0;
+            font-size: 15px;
+            color: black;
+        }
+
+        /* =========================
+           FORM STYLING
+           ========================= */
+        .message-form {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .form-row label {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--heading-text);
+        }
+
+        .message-form input,
+        .message-form select,
+        .message-form textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cfddee;
+            background-color: white;
+            padding: 10px 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .message-form textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        /* =========================
+           ACTION BUTTONS
+           ========================= */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        button:hover {
+            background-color: var(--accent-blue-hover);
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+           ========================= */
+        .success-message {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #027a48;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <span style="color: #5d87ff;">BUG</span>SLAYERS
+        </div>
+
+        <div class="flex-grow-1">
+            <div class="nav-section-title">Home</div>
+            <a href="#"><span class="icon-wrapper">🏠</span> Dashboard</a>
+
+            <div class="nav-section-title">Schedule</div>
+            <a href="" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">
+                <span class="icon-wrapper">📅</span> Weekly Schedule
+            </a>
+            <a href="#">
+                <span class="icon-wrapper">➕</span> Schedule
+            </a>
+
+            <div class="nav-section-title">Team Workspace</div>
+            <a href="#"><span class="icon-wrapper">👥</span> Teams</a>
+            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+            <a href="{% url 'inbox' %}" class="{% if request.resolver_match.url_name == 'inbox' or request.resolver_match.url_name == 'new_message' or request.resolver_match.url_name == 'sent' or request.resolver_match.url_name == 'drafts' %}active{% endif %}">
+                <span class="icon-wrapper">📩</span> Messages
+            </a>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="nav-section-title">Administration</div>
+            <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+            <a href="/admin/" target="_blank">
+                <span class="icon-wrapper">🛡️</span> Admin Panel
+            </a>
+        </div>
+    </div>
+
+    <!-- =========================
+         MAIN PAGE CONTENT
+         ========================= -->
+    <div class="main-content">
+        <div class="main-container">
+
+            <!-- First card: page heading -->
+            <div class="header-card">
+                <h1>Contact Team</h1>
+                <p>Manage messages</p>
+            </div>
+
+            <!-- Second card: top tab buttons -->
+            <div class="tabs-card">
+                <div class="tabs-bar">
+                    <a href="/messages/new-message/" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
+                    <a href="/messages/inbox/" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
+                    <a href="/messages/sent/" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
+                    <a href="/messages/drafts/" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+                </div>
+            </div>
+
+            <!-- Third card: page content -->
+            <div class="content-panel">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

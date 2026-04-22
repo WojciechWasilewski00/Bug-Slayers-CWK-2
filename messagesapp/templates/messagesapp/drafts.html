@@ -1,0 +1,17 @@
+{% extends 'messagesapp/base.html' %}
+
+{% block content %}
+<h2>Draft Messages</h2>
+
+{% for msg in messages %}
+    <div class="message-card">
+        <h3>{{ msg.message_subject }}</h3>
+        <p><strong>To:</strong> {{ msg.team }}</p>
+        <p><strong>Message:</strong> {{ msg.message_content }}</p>
+        <p><small>Saved on: {{ msg.sent_date }}</small></p>
+    </div>
+{% empty %}
+    <p>No draft messages yet.</p>
+{% endfor %}
+
+{% endblock %}

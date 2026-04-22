@@ -1,0 +1,20 @@
+{% extends 'messagesapp/base.html' %}
+
+{% block content %}
+<h2>Sent Messages</h2>
+
+{% if success_message %}
+    <p class="success-message">{{ success_message }}</p>
+{% endif %}
+
+{% for msg in messages %}
+    <div class="message-card">
+        <h3>{{ msg.message_subject }}</h3>
+        <p><strong>To:</strong> {{ msg.team }}</p>
+        <p><strong>Message:</strong> {{ msg.message_content }}</p>
+        <p><small>Sent on: {{ msg.sent_date }}</small></p>
+    </div>
+{% empty %}
+    <p>No sent messages yet.</p>
+{% endfor %}
+{% endblock %}
