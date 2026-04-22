@@ -10,7 +10,7 @@ from .forms import MessageForm
 
 def inbox(request):
     # temporary user (same as used when sending messages)
-    current_user = User.objects.first()
+    current_user = request.user
 
     inbox_messages = Message.objects.filter(
         message_status='sent'
