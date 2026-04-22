@@ -33,7 +33,7 @@ The application includes the following modules:
 | Felipe | Voting / Sessions |
 | Mariam | [Add module] |
 | Heidi | [Add module] |
-| Wojciech | [Add module] |
+| Wojciech | Teams Page|
 
 Each member is responsible for:
 - Backend (models, views)
