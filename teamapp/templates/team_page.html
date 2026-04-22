@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Team Registry</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .team-card {
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+      .dept-label {
+        font-size: 0.8em;
+        font-weight: bold;
+        color: #007bff;
+        text-transform: uppercase;
+      }
+      .team-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+      }
+      .view-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 15px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+      .skill-tag {
+        background: #e2e2e2;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Team Registry</h1>
+      <div
+        style="
+          margin-bottom: 30px;
+          background: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        "
+      >
+        <form
+          method="GET"
+          action="{% url 'team_list' %}"
+          style="display: flex; gap: 10px"
+        >
+          <input
+            type="text"
+            name="search"
+            placeholder="Search by name, department, or skill..."
+            value="{{ query|default:'' }}"
+            style="
+              flex-grow: 1;
+              padding: 10px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              font-size: 16px;
+            "
+          />
+
+          <button
+            type="submit"
+            style="
+              background: #007bff;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: bold;
+            "
+          >
+            Search
+          </button>
+
+          {% if query %}
+          <a
+            href="{% url 'team_list' %}"
+            style="
+              text-decoration: none;
+              background: #6c757d;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 4px;
+              font-size: 14px;
+            "
+          >
+            Clear
+          </a>
+          {% endif %}
+        </form>
+
+        {% if query %}
+        <p style="margin-top: 10px; color: #666">
+          Showing results for: <strong>"{{ query }}"</strong>
+        </p>
+        {% endif %}
+      </div>
+
+      <div class="team-grid">
+        {% for team in teams %} {% empty %}
+        <p>No teams found matching your search.</p>
+        {% endfor %}
+      </div>
+      {% for team in teams %}
+      <div class="team-card">
+        <span class="dept-label">{{ team.department }}</span>
+        <div class="team-header">
+          <h2 style="margin: 0">{{ team.team_name }}</h2>
+          <span><strong>Leader:</strong> {{ team.manager.first_name }}</span>
+        </div>
+        <p>
+          <strong>Skills:</strong> {% for skill in team.skills.all %}<span
+            class="skill-tag"
+            >{{ skill.name }}</span
+          >{% endfor %}
+        </p>
+        <a href="{% url 'team_detail' team.pk %}" class="view-btn"
+          >View Team Page</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
