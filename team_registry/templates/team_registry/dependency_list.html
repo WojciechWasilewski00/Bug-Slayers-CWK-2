@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dependencies</title>
+</head>
+<body>
+    <a href="{% url 'organisation_overview' %}">← Back to Organisation</a>
+    <h1>Team Dependencies</h1>
+    <a href="{% url 'dependency_create' %}">+ Add Dependency</a>
+    {% for dep in dependencies %}
+        <div>
+            <p>{{ dep.from_team }} → {{ dep.to_team }} ({{ dep.dependency_type }})</p>
+            <a href="{% url 'dependency_edit' dep.pk %}">Edit</a>
+            <a href="{% url 'dependency_delete' dep.pk %}">Delete</a>
+        </div>
+    {% empty %}
+        <p>No dependencies found.</p>
+    {% endfor %}
+</body>
+</html>

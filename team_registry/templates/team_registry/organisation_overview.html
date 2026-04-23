@@ -6,23 +6,32 @@
 <body>
     <h1>Organisation Overview</h1>
 
+    <a href="{% url 'department_create' %}">+ Add Department</a> |
+    <a href="{% url 'teamtype_list' %}">Team Types</a> |
+    <a href="{% url 'dependency_list' %}">Dependencies</a>
+
     <h2>Departments</h2>
     {% for department in departments %}
         <div>
             <h3><a href="{% url 'department_detail' department.pk %}">{{ department.name }}</a></h3>
             <p>Specialisation: {{ department.specialisation }}</p>
             <p>Leader: {{ department.leader }}</p>
+            <a href="{% url 'department_edit' department.pk %}">Edit</a>
+            <a href="{% url 'department_delete' department.pk %}">Delete</a>
         </div>
     {% empty %}
         <p>No departments found.</p>
     {% endfor %}
 
     <h2>All Teams</h2>
+    <a href="{% url 'team_create' %}">+ Add Team</a>
     {% for team in teams %}
         <div>
             <h3><a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a></h3>
             <p>Department: {{ team.department }}</p>
             <p>Type: {{ team.team_type }}</p>
+            <a href="{% url 'team_edit' team.pk %}">Edit</a>
+            <a href="{% url 'team_delete' team.pk %}">Delete</a>
         </div>
     {% empty %}
         <p>No teams found.</p>
