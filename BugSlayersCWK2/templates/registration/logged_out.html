@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="logout-container" style="max-width: 400px; margin: 100px auto; text-align: center; padding: 40px; background: white; border-radius: 8px; border: 1px solid #eee;">
+    <div style="font-size: 3rem; margin-bottom: 20px;">👋</div>
+    <h2 style="color: #2a3547;">Logged Out</h2>
+    <p style="color: #5a6a85; margin-bottom: 25px;">You have been safely logged out of your account.</p>
+    
+    <a href="{% url 'login' %}" style="display: inline-block; background: #5d87ff; color: white; text-decoration: none; padding: 10px 25px; border-radius: 5px; font-weight: bold;">
+        Login Again
+    </a>
+</div>
+{% endblock %}
