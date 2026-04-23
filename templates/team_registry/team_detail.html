@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ team.name }}</title>
+</head>
+<body>
+    <a href="{% url 'organisation_overview' %}">← Back to Organisation</a>
+
+    <h1>{{ team.name }}</h1>
+    <p><strong>Department:</strong> {{ team.department }}</p>
+    <p><strong>Type:</strong> {{ team.team_type }}</p>
+    <p><strong>Description:</strong> {{ team.description }}</p>
+
+    <h2>Dependencies (This team depends on)</h2>
+    {% for dep in dependencies_from %}
+        <p>→ {{ dep.to_team }} ({{ dep.dependency_type }})</p>
+    {% empty %}
+        <p>No outgoing dependencies.</p>
+    {% endfor %}
+
+    <h2>Dependents (Teams that depend on this team)</h2>
+    {% for dep in dependencies_to %}
+        <p>← {{ dep.from_team }} ({{ dep.dependency_type }})</p>
+    {% empty %}
+        <p>No incoming dependencies.</p>
+    {% endfor %}
+</body>
+</html>

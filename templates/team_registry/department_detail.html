@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ department.name }}</title>
+</head>
+<body>
+    <a href="{% url 'organisation_overview' %}">← Back to Organisation</a>
+
+    <h1>{{ department.name }}</h1>
+    <p><strong>Specialisation:</strong> {{ department.specialisation }}</p>
+    <p><strong>Leader:</strong> {{ department.leader }}</p>
+
+    <h2>Teams in this Department</h2>
+    {% for team in teams %}
+        <div>
+            <h3><a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a></h3>
+            <p>{{ team.description }}</p>
+        </div>
+    {% empty %}
+        <p>No teams in this department.</p>
+    {% endfor %}
+</body>
+</html>
