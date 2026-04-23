@@ -236,33 +236,12 @@
             min-height: 420px;
         }
 
-        h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--heading-text);
-        }
-
         .message-card {
             background-color: var(--soft-blue-2);
             border: 1px solid var(--border-light);
             border-radius: 12px;
             padding: 16px 18px;
             margin-bottom: 14px;
-        }
-
-        .message-card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: black;
-        }
-
-        .message-card p {
-            margin: 6px 0;
-            font-size: 15px;
-            color: black;
         }
 
         .message-form {
@@ -345,23 +324,28 @@
                 <span class="icon-wrapper">🏠</span> Dashboard
             </a>
 
-            <div class="nav-section-title">Schedule</div>
-            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">
-                <span class="icon-wrapper">📅</span> Weekly Schedule
+            <div class="nav-section-title">Team Management</div>
+            <a href="{% url 'team_list' %}">
+                <span class="icon-wrapper">👥</span> Teams
+            </a>
+            <a href="#">
+                <span class="icon-wrapper">📋</span> Registry
             </a>
 
-            <div class="nav-section-title">Team Workspace</div>
-            <a href="#"><span class="icon-wrapper">👥</span> Teams</a>
-            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-
-            <a href="{% url 'inbox' %}" class="{% if 'messages' in request.path %}active{% endif %}">
+            <div class="nav-section-title">Apps</div>
+            <a href="{% url 'weekly_schedule' %}">
+                <span class="icon-wrapper">📅</span> Schedule
+            </a>
+            <a href="{% url 'inbox' %}" >
                 <span class="icon-wrapper">📩</span> Messages
             </a>
         </div>
 
         <div class="sidebar-bottom">
             <div class="nav-section-title">Administration</div>
-            <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+            <a href="#">
+                <span class="icon-wrapper">⚙️</span> Settings
+            </a>
             <a href="/admin/" target="_blank">
                 <span class="icon-wrapper">🛡️</span> Admin Panel
             </a>
@@ -378,7 +362,7 @@
             </div>
             <div class="topbar-right">
                 <span>Hello, <strong>{{ user.username|default:"Bug Slayer" }}</strong></span>
-                <a href="#" class="logout-btn">Logout</a>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
             </div>
         </div>
 
@@ -391,10 +375,10 @@
 
                 <div class="tabs-card">
                     <div class="tabs-bar">
-                        <a href="{% url 'new_message' %}" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
-                        <a href="{% url 'inbox' %}" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
-                        <a href="{% url 'sent' %}" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
-                        <a href="{% url 'drafts' %}" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+                        <a href="{% url 'new_message' %}" class="tab-link">New Message</a>
+                        <a href="{% url 'inbox' %}" class="tab-link ">Inbox</a>
+                        <a href="{% url 'sent' %}" class="tab-link ">Sent</a>
+                        <a href="{% url 'drafts' %}" class="tab-link ">Drafts</a>
                     </div>
                 </div>
 

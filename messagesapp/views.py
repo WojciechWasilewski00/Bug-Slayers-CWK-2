@@ -4,22 +4,28 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from teamapp.models import Team
 from .models import Message
 from .forms import MessageForm
 
 
-def inbox(request):
-    # temporary user (same as used when sending messages)
-    current_user = request.user
 
+def inbox(request):
+    # Temporary test user
+    current_user = User.objects.get(username="2.Mariam_W2074138")
+
+    # Get this user's team
+    current_team = Team.objects.get(manager=current_user)
+
+    # Show only messages sent to this team
     inbox_messages = Message.objects.filter(
-        message_status='sent'
-    ).exclude(sender=current_user)
+        message_status='sent',
+        team=current_team
+    )
 
     return render(request, 'messagesapp/inbox.html', {
         'messages': inbox_messages
     })
-
 
 def new_message(request):
     if request.method == 'POST':
@@ -28,12 +34,8 @@ def new_message(request):
         if form.is_valid():
             msg = form.save(commit=False)
 
-            # Temporary user (until login fully used)
-            msg.sender = User.objects.last()
-
-            # Get extra fields (not saved)
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
+            # Temporary test sender user
+            msg.sender = User.objects.get(username="1.Mariam_W2074138")
 
             action = request.POST.get('action')
 

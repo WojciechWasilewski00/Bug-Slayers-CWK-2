@@ -1,14 +1,10 @@
-# Author: [Mariam El-Mansouri Abaich]
-# ID: [w2074138]
+# Author: Mariam El-Mansouri Abaich
+# ID: w2074138
 # Contribution: Backend Models for Messages Management (CWK2)
 
 from django.db import models
 from django.contrib.auth.models import User
 
-class Team(models.Model):
-    team_name = models.CharField(max_length=255) 
-    def __str__(self):
-         return self.team_name
 
 class Message(models.Model):
     message_subject = models.CharField(max_length=255)
@@ -16,13 +12,9 @@ class Message(models.Model):
     message_status = models.CharField(max_length=10)  # draft / sent / read
     sent_date = models.DateTimeField(auto_now_add=True)
 
-    # Foreign keys (relationships)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    team = models.ForeignKey('Team', on_delete=models.CASCADE)
+    team = models.ForeignKey('teamapp.Team', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.message_subject
-    
-    
-
 

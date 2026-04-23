@@ -128,7 +128,10 @@ LOGOUT_REDIRECT_URL = 'login'
 
 LOGOUT_ON_GET = True
 
+# Static files (CSS, JS, images)
+# This tells Django where to find the static folder
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "BugSlayersCWK2" / "static",
 ]
 
