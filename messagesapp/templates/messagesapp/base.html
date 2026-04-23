@@ -1,23 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Messages App{% endblock %}</title>
-
-    <!-- Google font used in the group design For the sidebar  -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* =========================
-           MAIN COLOURS
-           ========================= */
         :root {
             --sidebar-bg: #ffffff;
             --sidebar-text: #5a6a85;
-            --accent-blue: #5d87ff;    /* dark blue for top buttons */
+            --accent-blue: #5d87ff;
             --accent-blue-hover: #5d87ff;
-            --soft-blue: #c7e0f2;       /* light blue from your original UI */
+            --soft-blue: #c7e0f2;
             --soft-blue-2: #d9ecf7;
             --body-bg: #f4f7f6;
             --panel-bg: #ffffff;
@@ -25,9 +21,6 @@
             --heading-text: #2a3547;
         }
 
-        /* =========================
-           GENERAL PAGE RESET
-           ========================= */
         * {
             box-sizing: border-box;
         }
@@ -41,10 +34,6 @@
             color: var(--heading-text);
         }
 
-        /* =========================
-           SIDEBAR
-           This CSS is based in sidebar structure
-           ========================= */
         .sidebar {
             width: 270px;
             background-color: var(--sidebar-bg);
@@ -59,11 +48,16 @@
         }
 
         .sidebar-brand {
-            padding: 30px 25px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--heading-text);
-            letter-spacing: -0.5px;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar-logo {
+            max-width: 180px;
+            height: auto;
+            display: block;
         }
 
         .nav-section-title {
@@ -109,7 +103,10 @@
             align-items: center;
         }
 
-        /* Push bottom admin/settings to the bottom */
+        .flex-grow-1 {
+            flex: 1;
+        }
+
         .sidebar-bottom {
             margin-top: auto;
             border-top: 1px solid var(--border-light);
@@ -117,26 +114,18 @@
             padding-bottom: 18px;
         }
 
-        /* =========================
-           MAIN CONTENT AREA
-           This is the center of the page
-           ========================= */
         .main-content {
             margin-left: 270px;
             width: calc(100% - 270px);
-            padding: 40px;
+            padding: 24px;
         }
 
         .main-container {
-            max-width: 980px;
+            width: 100%;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        /* =========================
-           TOP HEADER CARD
-           This is the first card:
-           Contact Team + subtitle
-           ========================= */
         .header-card {
             background-color: var(--panel-bg);
             border: 1px solid var(--border-light);
@@ -158,11 +147,6 @@
             color: var(--sidebar-text);
         }
 
-        /* =========================
-           TOP TABS CARD
-           This is your second card:
-           New Message / Inbox / Sent / Drafts
-           ========================= */
         .tabs-card {
             background-color: var(--panel-bg);
             border: 1px solid var(--border-light);
@@ -174,7 +158,7 @@
         .tabs-bar {
             display: flex;
             gap: 14px;
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
         }
 
@@ -197,17 +181,11 @@
             color: white;
         }
 
-        /* Active top tab */
         .tab-link.active {
             background-color: var(--accent-blue-hover);
             color: white;
         }
 
-        /* =========================
-           MAIN CONTENT CARD
-           This is the third card:
-           all page content goes here
-           ========================= */
         .content-panel {
             background-color: var(--panel-bg);
             border: 1px solid var(--border-light);
@@ -216,9 +194,6 @@
             min-height: 420px;
         }
 
-        /* =========================
-           HEADINGS INSIDE CONTENT
-           ========================= */
         h2 {
             margin-top: 0;
             margin-bottom: 20px;
@@ -227,10 +202,6 @@
             color: var(--heading-text);
         }
 
-        /* =========================
-           MESSAGE CARDS
-           For  New message /inbox / sent / drafts 
-           ========================= */
         .message-card {
             background-color: var(--soft-blue-2);
             border: 1px solid var(--border-light);
@@ -252,9 +223,6 @@
             color: black;
         }
 
-        /* =========================
-           FORM STYLING
-           ========================= */
         .message-form {
             width: 100%;
         }
@@ -291,9 +259,6 @@
             min-height: 130px;
         }
 
-        /* =========================
-           ACTION BUTTONS
-           ========================= */
         .form-actions {
             display: flex;
             justify-content: flex-end;
@@ -317,9 +282,6 @@
             background-color: var(--accent-blue-hover);
         }
 
-        /* =========================
-           SUCCESS MESSAGE
-           ========================= */
         .success-message {
             font-weight: 700;
             font-size: 16px;
@@ -328,32 +290,33 @@
         }
     </style>
 </head>
+
 <body>
 
-    <!-- =========================
-         SIDEBAR
-         ========================= -->
     <div class="sidebar">
         <div class="sidebar-brand">
-            <span style="color: #5d87ff;">BUG</span>SLAYERS
+            <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
         </div>
 
         <div class="flex-grow-1">
             <div class="nav-section-title">Home</div>
-            <a href="#"><span class="icon-wrapper">🏠</span> Dashboard</a>
+            <a href="#">
+                <span class="icon-wrapper">🏠</span> Dashboard
+            </a>
 
             <div class="nav-section-title">Schedule</div>
-            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">📅</span> Weekly Schedule
-            
-            </a>
             <a href="#">
+                <span class="icon-wrapper">📅</span> Weekly Schedule
+            </a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#addMeetingModal">
                 <span class="icon-wrapper">➕</span> Schedule
             </a>
 
             <div class="nav-section-title">Team Workspace</div>
             <a href="#"><span class="icon-wrapper">👥</span> Teams</a>
             <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-            <a href="{% url 'inbox' %}" class="{% if request.resolver_match.url_name == 'inbox' or request.resolver_match.url_name == 'new_message' or request.resolver_match.url_name == 'sent' or request.resolver_match.url_name == 'drafts' %}active{% endif %}">
+
+            <a href="{% url 'inbox' %}" class="{% if 'messages' in request.path %}active{% endif %}">
                 <span class="icon-wrapper">📩</span> Messages
             </a>
         </div>
@@ -367,29 +330,23 @@
         </div>
     </div>
 
-    <!-- =========================
-         MAIN PAGE CONTENT
-         ========================= -->
     <div class="main-content">
         <div class="main-container">
 
-            <!-- First card: page heading -->
             <div class="header-card">
                 <h1>Contact Team</h1>
                 <p>Manage messages</p>
             </div>
 
-            <!-- Second card: top tab buttons -->
             <div class="tabs-card">
                 <div class="tabs-bar">
-                    <a href="/messages/new-message/" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
-                    <a href="/messages/inbox/" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
-                    <a href="/messages/sent/" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
-                    <a href="/messages/drafts/" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+                    <a href="{% url 'new_message' %}" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
+                    <a href="{% url 'inbox' %}" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
+                    <a href="{% url 'sent' %}" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
+                    <a href="{% url 'drafts' %}" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
                 </div>
             </div>
 
-            <!-- Third card: page content -->
             <div class="content-panel">
                 {% block content %}
                 {% endblock %}
