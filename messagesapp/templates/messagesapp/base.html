@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Messages App{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -116,8 +118,48 @@
 
         .main-content {
             margin-left: 270px;
-            width: calc(100% - 270px);
-            padding: 24px;
+            flex-grow: 1;
+            padding: 0;
+        }
+
+        .topbar {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar-nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .topbar-nav a {
+            text-decoration: none;
+            color: #42526e;
+            font-weight: 500;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .page-wrapper {
+            padding: 32px;
         }
 
         .main-container {
@@ -288,12 +330,10 @@
             margin-bottom: 15px;
             color: #027a48;
         }
-        
     </style>
 </head>
 
 <body>
-
     <div class="sidebar">
         <div class="sidebar-brand">
             <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
@@ -301,14 +341,15 @@
 
         <div class="flex-grow-1">
             <div class="nav-section-title">Home</div>
-            <a href="#">
+            <a href="{% url 'dashboard' %}">
                 <span class="icon-wrapper">🏠</span> Dashboard
             </a>
 
             <div class="nav-section-title">Schedule</div>
+            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">
+                <span class="icon-wrapper">📅</span> Weekly Schedule
+            </a>
 
-            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">📅</span> Weekly Schedule
-            
             <div class="nav-section-title">Team Workspace</div>
             <a href="#"><span class="icon-wrapper">👥</span> Teams</a>
             <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
@@ -328,29 +369,43 @@
     </div>
 
     <div class="main-content">
-        <div class="main-container">
-
-            <div class="header-card">
-                <h1>Contact Team</h1>
-                <p>Manage messages</p>
+        <div class="topbar">
+            <div class="topbar-nav">
+                <a href="{% url 'dashboard' %}">Home</a>
+                <a href="#">Service</a>
+                <a href="#">Portfolio</a>
+                <a href="#">Contact</a>
             </div>
+            <div class="topbar-right">
+                <span>Hello, <strong>{{ user.username|default:"Bug Slayer" }}</strong></span>
+                <a href="#" class="logout-btn">Logout</a>
+            </div>
+        </div>
 
-            <div class="tabs-card">
-                <div class="tabs-bar">
-                    <a href="{% url 'new_message' %}" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
-                    <a href="{% url 'inbox' %}" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
-                    <a href="{% url 'sent' %}" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
-                    <a href="{% url 'drafts' %}" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+        <div class="page-wrapper">
+            <div class="main-container">
+                <div class="header-card">
+                    <h1>Contact Team</h1>
+                    <p>Manage messages</p>
+                </div>
+
+                <div class="tabs-card">
+                    <div class="tabs-bar">
+                        <a href="{% url 'new_message' %}" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
+                        <a href="{% url 'inbox' %}" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
+                        <a href="{% url 'sent' %}" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
+                        <a href="{% url 'drafts' %}" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+                    </div>
+                </div>
+
+                <div class="content-panel">
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
-
-            <div class="content-panel">
-                {% block content %}
-                {% endblock %}
-            </div>
-
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
