@@ -9,6 +9,9 @@ The system must follow:
 - Use case diagrams  
 - Low and high-fidelity wireframes  
 
+Tip for when to run server:
+- python manage.py runserver in terminal
+
 ---
 
 ## 🧩 Core System Features
@@ -84,3 +87,4 @@ git commit
 git pull (One last check to see if anyone pushed while you were coding).
 
 git push (Final upload).
+

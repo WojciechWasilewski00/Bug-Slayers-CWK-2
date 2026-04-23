@@ -15,24 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.http import HttpResponse
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
-
-
-def home(request):
-    return HttpResponse("Welcome to the Home Page!")
-
-
-from django.contrib import admin
-from django.urls import path, include
+from . import views  # Ensure you have dashboard_view and home_redirect in your project's views.py
 
 urlpatterns = [
+    # 1. Admin Panel
     path('admin/', admin.site.urls),
-    path('', include('teamapp.urls')), # Wojciech's path for team page
-    path('', include('scheduling.urls')),
-    path('messages/', include('messagesapp.urls')), # Mariam's path for Message 
-    path('', include('team_registry.urls')), # Felipe's path Team registry page
+    
+    # 2. Authentication (Login/Logout)
+    # This provides: /accounts/login/ and /accounts/logout/
+    path('accounts/', include('django.contrib.auth.urls')), 
 
+    # 3. Core Navigation
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('', views.home_redirect, name='home'),
+    
+    # 4. Team Workspace & Registry
+    path('teams/', include('teamapp.urls')),
+    path('registry/', include('team_registry.urls')), # Added as requested
+    
+    # 5. Features
+    path('schedule/', include('scheduling.urls')),
+    path('messages/', include('messagesapp.urls')),
 ]
-
