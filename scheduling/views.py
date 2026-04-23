@@ -3,6 +3,7 @@ from django.utils import timezone
 from datetime import timedelta
 from .models import Meeting
 from .forms import MeetingForm
+from django.contrib.auth.decorators import login_required
 
 # 1. The Weekly List View (Read)
 from django.utils import timezone
@@ -53,3 +54,19 @@ def edit_meeting(request, pk):
         'form': form,
         'edit_mode': True  # This helps us change the button text in the HTML
     })
+    
+    from django.contrib.auth.decorators import login_required
+
+# 5. The Dashboard View (Overview)
+@login_required
+def dashboard_view(request):
+    # Optional: You can pass actual data to your dashboard here
+    # For example, counting how many meetings are coming up:
+    upcoming_meetings_count = Meeting.objects.filter(date_time__gte=timezone.now()).count()
+    
+    context = {
+        'meeting_count': upcoming_meetings_count,
+        'user_name': request.user.username,
+    }
+    
+    return render(request, 'scheduling/dashboard.html', context)

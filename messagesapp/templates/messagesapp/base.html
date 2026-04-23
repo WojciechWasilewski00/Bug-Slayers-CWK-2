@@ -288,6 +288,7 @@
             margin-bottom: 15px;
             color: #027a48;
         }
+        
     </style>
 </head>
 
@@ -305,13 +306,9 @@
             </a>
 
             <div class="nav-section-title">Schedule</div>
-            <a href="#">
-                <span class="icon-wrapper">📅</span> Weekly Schedule
-            </a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#addMeetingModal">
-                <span class="icon-wrapper">➕</span> Schedule
-            </a>
 
+            <a href="{% url 'weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">📅</span> Weekly Schedule
+            
             <div class="nav-section-title">Team Workspace</div>
             <a href="#"><span class="icon-wrapper">👥</span> Teams</a>
             <a href="#"><span class="icon-wrapper">📂</span> Documents</a>

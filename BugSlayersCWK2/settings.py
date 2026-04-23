@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'teamapp', # Wojciech's app
-    'team_registry',
+    'team_registry', # Felipe's app
     'scheduling',  # Jayne's app
     'messagesapp', # Mariam' s app
 ]
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'BugSlayersCWK2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [BASE_DIR / 'templates'],
+        'DIRS':  [BASE_DIR / 'BugSlayersCWK2' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,9 +118,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-# This section is for the logo image W2074138
 STATIC_URL = 'static/'
+
+# Where to go after logging in
+LOGIN_REDIRECT_URL = 'dashboard'
+
+# Where to go after logging out (usually back to the login page)
+LOGOUT_REDIRECT_URL = 'login'
+
+LOGOUT_ON_GET = True
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
