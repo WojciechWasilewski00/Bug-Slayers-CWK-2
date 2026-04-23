@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q  # This allows for "OR" searches
-from .models import Team
+from team_registry.models import Team
 
-def team_list(request):
+def team_page(request):
     # Get the text from the search bar (name="search" in HTML)
     query = request.GET.get('search')
     

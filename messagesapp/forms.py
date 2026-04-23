@@ -1,6 +1,6 @@
 from django import forms
 from .models import Message
-from teamapp.models import Team
+from team_registry.models import Team
 
 
 class MessageForm(forms.ModelForm):

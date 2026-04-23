@@ -10,5 +10,5 @@ def dashboard_view(request):
     return render(request, 'dashboard.html')
 
 # THis handles the teams URL (127.0.0.1:8000/teams/)
-def team_list_view(request):
+def team_page_view(request):
     return render(request, 'team_page.html')

@@ -31,7 +31,7 @@ urlpatterns = [
     path('', views.home_redirect, name='home'),
     
     # 4. Team Workspace 
-    path('teams/', views.team_list_view, name='teams_page'),
+    path('', include('team_registry.urls')),
     
     # 5. Features
     path('schedule/', include('scheduling.urls')),

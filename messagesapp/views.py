@@ -4,7 +4,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from teamapp.models import Team
+from team_registry.models import Team
 from .models import Message
 from .forms import MessageForm
 
