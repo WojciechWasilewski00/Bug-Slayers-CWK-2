@@ -30,11 +30,11 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('', views.home_redirect, name='home'),
     
-    # 4. Team Workspace & Registry
-    path('teams/', include('teamapp.urls')),
-    path('registry/', include('team_registry.urls')), # Added as requested
+    # 4. Team Workspace 
+    path('teams/', views.team_list_view, name='teams_page'),
     
     # 5. Features
     path('schedule/', include('scheduling.urls')),
     path('messages/', include('messagesapp.urls')),
+    # Felipe put you map here
 ]
