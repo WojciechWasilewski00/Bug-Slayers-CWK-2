@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ department.name }}</title>
-</head>
-<body>
-    <a href="{% url 'organisation_overview' %}">← Back to Organisation</a>
+{% extends 'base.html' %}
 
-    <h1>{{ department.name }}</h1>
-    <p><strong>Specialisation:</strong> {{ department.specialisation }}</p>
-    <p><strong>Leader:</strong> {{ department.leader }}</p>
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'organisation_overview' %}" class="btn btn-secondary mb-3">← Back to Organisation</a>
+
+    <div class="card p-4 mb-4">
+        <h1>{{ department.name }}</h1>
+        <p><strong>Specialisation:</strong> {{ department.specialisation }}</p>
+        <p><strong>Leader:</strong> {{ department.leader }}</p>
+        <a href="{% url 'department_edit' department.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'department_delete' department.pk %}" class="btn btn-danger">Delete</a>
+    </div>
 
     <h2>Teams in this Department</h2>
     {% for team in teams %}
-        <div>
+        <div class="card mb-3 p-3">
             <h3><a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a></h3>
             <p>{{ team.description }}</p>
         </div>
     {% empty %}
         <p>No teams in this department.</p>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'teamapp', # Wojciech's app
-    'team_registry',
+    'team_registry', # Felipe's app
     'scheduling',  # Jayne's app
     'messagesapp', # Mariam' s app
 ]
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'BugSlayersCWK2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [BASE_DIR / 'templates'],
+        'DIRS':  [BASE_DIR / 'BugSlayersCWK2' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

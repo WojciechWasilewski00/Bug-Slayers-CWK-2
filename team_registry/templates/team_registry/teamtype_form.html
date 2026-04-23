@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-    <a href="{% url 'teamtype_list' %}">← Back to Team Types</a>
-    <h1>{{ title }}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'teamtype_list' %}" class="btn btn-secondary mb-3">← Back to Team Types</a>
+    <div class="card p-4" style="max-width: 600px;">
+        <h1 class="mb-4">{{ title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete {{ type }}</title>
-</head>
-<body>
-    <h1>Delete {{ type }}</h1>
-    <p>Are you sure you want to delete <strong>{{ object }}</strong>?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-        <a href="{% url 'organisation_overview' %}">Cancel</a>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Delete {{ type }}{% endblock %}
+
+{% block content %}
+    <div class="card p-4" style="max-width: 500px;">
+        <h1 class="mb-4">Delete {{ type }}</h1>
+        <p>Are you sure you want to delete <strong>{{ object }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'organisation_overview' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

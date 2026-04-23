@@ -1,40 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Organisation Overview</title>
-</head>
-<body>
-    <h1>Organisation Overview</h1>
+{% extends 'base.html' %}
 
-    <a href="{% url 'department_create' %}">+ Add Department</a> |
-    <a href="{% url 'teamtype_list' %}">Team Types</a> |
-    <a href="{% url 'dependency_list' %}">Dependencies</a>
+{% block title %}Organisation Overview{% endblock %}
 
-    <h2>Departments</h2>
+{% block content %}
+    <h1 class="mb-4">Organisation Overview</h1>
+
+    <div class="mb-3">
+        <a href="{% url 'department_create' %}" class="btn btn-primary">+ Add Department</a>
+        <a href="{% url 'teamtype_list' %}" class="btn btn-secondary">Team Types</a>
+        <a href="{% url 'dependency_list' %}" class="btn btn-secondary">Dependencies</a>
+    </div>
+
+    <h2 class="mt-4">Departments</h2>
     {% for department in departments %}
-        <div>
+        <div class="card mb-3 p-3">
             <h3><a href="{% url 'department_detail' department.pk %}">{{ department.name }}</a></h3>
             <p>Specialisation: {{ department.specialisation }}</p>
             <p>Leader: {{ department.leader }}</p>
-            <a href="{% url 'department_edit' department.pk %}">Edit</a>
-            <a href="{% url 'department_delete' department.pk %}">Delete</a>
+            <a href="{% url 'department_edit' department.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'department_delete' department.pk %}" class="btn btn-sm btn-danger">Delete</a>
         </div>
     {% empty %}
         <p>No departments found.</p>
     {% endfor %}
 
-    <h2>All Teams</h2>
-    <a href="{% url 'team_create' %}">+ Add Team</a>
+    <h2 class="mt-4">All Teams</h2>
+    <div class="mb-3">
+        <a href="{% url 'team_create' %}" class="btn btn-primary">+ Add Team</a>
+    </div>
     {% for team in teams %}
-        <div>
+        <div class="card mb-3 p-3">
             <h3><a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a></h3>
             <p>Department: {{ team.department }}</p>
             <p>Type: {{ team.team_type }}</p>
-            <a href="{% url 'team_edit' team.pk %}">Edit</a>
-            <a href="{% url 'team_delete' team.pk %}">Delete</a>
+            <a href="{% url 'team_edit' team.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'team_delete' team.pk %}" class="btn btn-sm btn-danger">Delete</a>
         </div>
     {% empty %}
         <p>No teams found.</p>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
