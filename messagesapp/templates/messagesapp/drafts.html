@@ -1,17 +1,38 @@
+<!--
+Author: Mariam El-Mansouri Abaich
+Student ID: w2074138
+
+Contribution:
+I was responsible for developing the Draft Messages page.
+This template displays draft messages dynamically using Django template logic,
+showing the subject, team, content, and saved date.
+-->
 {% extends 'messagesapp/base.html' %}
-
+<!-- Extends the base template to reuse layout (sidebar, navigation, styling) -->
 {% block content %}
+<!-- Defines the content section that will be inserted into the base template -->
 <h2>Draft Messages</h2>
-
+<!-- Page heading for the drafts section -->
 {% for msg in messages %}
-    <div class="message-card">
-        <h3>{{ msg.message_subject }}</h3>
-        <p><strong>To:</strong> {{ msg.team }}</p>
-        <p><strong>Message:</strong> {{ msg.message_content }}</p>
-        <p><small>Saved on: {{ msg.sent_date }}</small></p>
-    </div>
-{% empty %}
-    <p>No draft messages yet.</p>
-{% endfor %}
+<!-- Loop through all draft messages passed from the backend -->
 
+    <div class="message-card">
+        <!-- Container for each individual draft message -->
+        <h3>{{ msg.message_subject }}</h3>
+        <!-- Displays the subject of the draft message -->
+        <p><strong>To:</strong> {{ msg.team }}</p>
+        <!-- Displays the team the draft message is intended for -->
+        <p><strong>Message:</strong> {{ msg.message_content }}</p>
+        <!-- Displays the content of the draft message -->
+        <p><small>Saved on: {{ msg.sent_date }}</small></p>
+        <!-- Displays the date the draft was saved -->
+    </div>
+
+{% empty %}
+<!-- If there are no draft messages, this block is displayed -->
+    <p>No draft messages yet.</p>
+    <!-- Message shown when there are no drafts -->
+{% endfor %}
+<!-- Ends the loop -->
 {% endblock %}
+<!-- Ends the content block -->

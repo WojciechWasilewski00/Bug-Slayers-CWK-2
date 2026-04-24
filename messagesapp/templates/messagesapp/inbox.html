@@ -1,17 +1,35 @@
-{% extends 'messagesapp/base.html' %}
-
+<!--
+Author: Mariam El-Mansouri Abaich
+Student ID: w2074138
+Contribution:
+I was responsible for developing the Inbox page for the Messages feature.
+This template dynamically displays messages passed from the backend using Django template logic.
+It shows the message subject, team, content, and date, and includes an empty state when no messages are available.
+-->
+{% extends 'messagesapp/base.html' %} 
+<!-- Extends the base template to reuse the main layout (sidebar, navigation, styling) -->
 {% block content %}
+<!-- Defines the content section that will be inserted into the base template -->
 <h2>Inbox</h2>
-
+<!-- Page heading displayed at the top -->
 {% for msg in messages %}
+<!-- Loop through each message passed from the backend (views.py) -->
     <div class="message-card">
+        <!-- Container for each individual message -->
         <h3>{{ msg.message_subject }}</h3>
+        <!-- Displays the subject of the message -->
         <p><strong>To:</strong> {{ msg.team }}</p>
+        <!-- Displays the team the message was sent to -->
         <p>{{ msg.message_content }}</p>
+        <!-- Displays the actual message content -->
         <p><small>Date: {{ msg.sent_date }}</small></p>
+        <!-- Displays the date and time the message was sent -->
     </div>
 {% empty %}
+<!-- If there are no messages, this block runs instead -->
     <p>No inbox messages.</p>
+    <!-- Displays a message to the user when inbox is empty -->
 {% endfor %}
-
+<!-- Ends the loop -->
 {% endblock %}
+<!-- Ends the content block -->

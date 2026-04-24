@@ -1,40 +1,64 @@
-{% extends 'messagesapp/base.html' %}
+<!--
+Author: Mariam El-Mansouri Abaich
+Student ID: w2074138
 
+Contribution:
+I was responsible for developing the message creation form.
+This template allows users to input message details and either send the message
+or save it as a draft. It integrates with Django forms and backend logic.
+-->
+
+{% extends 'messagesapp/base.html' %}
+<!-- Extends the base template to reuse layout (sidebar, navigation, styling) -->
 {% block content %}
+<!-- Defines the section where this page’s content will be inserted -->
+
 <h2>Contact Team</h2>
+<!-- Page heading -->
 
 <form method="POST" class="message-form">
+    <!-- Form that sends data to the server using POST method -->
     {% csrf_token %}
+    <!-- Security token required by Django to prevent CSRF attacks -->
 
     <div class="form-row">
         <label>Name:</label>
         {{ form.name }}
+        <!-- Input field for user's name -->
     </div>
 
     <div class="form-row">
         <label>Email:</label>
         {{ form.email }}
+        <!-- Input field for user's email -->
     </div>
 
     <div class="form-row">
         <label>To:</label>
         {{ form.team }}
+        <!-- Dropdown field to select a team from the database -->
     </div>
 
     <div class="form-row">
         <label>Subject:</label>
         {{ form.message_subject }}
+        <!-- Input field for message subject -->
     </div>
 
     <div class="form-row" style="align-items: start;">
         <label>Message:</label>
         {{ form.message_content }}
+        <!-- Text area for message content -->
     </div>
 
     <div class="form-actions">
+        <!-- Container for action buttons -->
         <button type="submit" name="action" value="send">Send</button>
+        <!-- Submits form and sets action to 'send' -->
         <button type="submit" name="action" value="draft">Save Draft</button>
+        <!-- Submits form and sets action to 'draft' -->
     </div>
+
 </form>
 
 {% endblock %}

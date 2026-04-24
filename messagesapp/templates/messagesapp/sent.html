@@ -1,20 +1,49 @@
-{% extends 'messagesapp/base.html' %}
+<!--
+Author: Mariam El-Mansouri Abaich
+Student ID: w2074138
 
+Contribution:
+I was responsible for developing the Sent Messages page.
+This template displays messages sent by the user and provides feedback
+when a message is successfully sent.
+-->
+
+{% extends 'messagesapp/base.html' %}
+<!-- Extends the base template to reuse layout (sidebar, navigation, styling) -->
 {% block content %}
+<!-- Defines the content section for this page -->
 <h2>Sent Messages</h2>
+<!-- Page heading -->
 
 {% if success_message %}
+    <!-- Checks if a success message exists (e.g. after sending a message) -->
     <p class="success-message">{{ success_message }}</p>
+    <!-- Displays confirmation message to the user -->
 {% endif %}
 
 {% for msg in messages %}
+<!-- Loop through all sent messages passed from the backend -->
+
     <div class="message-card">
+        <!-- Container for each individual sent message -->
         <h3>{{ msg.message_subject }}</h3>
+        <!-- Displays the subject of the message -->
         <p><strong>To:</strong> {{ msg.team }}</p>
+        <!-- Displays the team the message was sent to -->
         <p><strong>Message:</strong> {{ msg.message_content }}</p>
+        <!-- Displays the content of the message -->
         <p><small>Sent on: {{ msg.sent_date }}</small></p>
+        <!-- Displays the date the message was sent -->
+
     </div>
+
 {% empty %}
+<!-- If no sent messages exist, this block is shown -->
+
     <p>No sent messages yet.</p>
+    <!-- Friendly message when there are no sent messages -->
+
 {% endfor %}
+<!-- Ends the loop -->
 {% endblock %}
+<!-- Ends the content block -->
