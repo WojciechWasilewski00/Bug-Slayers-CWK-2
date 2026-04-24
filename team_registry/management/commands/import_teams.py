@@ -2,7 +2,7 @@ import csv
 import os
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from teamapp.models import Team, Skill
+from team_registry.models import Team, Skill
 
 class Command(BaseCommand):
     help = 'Imports teams with dependency types'

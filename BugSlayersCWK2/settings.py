@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'teamapp', # Wojciech's app
-    'team_registry', # Felipe's app
+    'team_registry', # Wojciech's app
     'scheduling',  # Jayne's app
     'messagesapp', # Mariam' s app
 ]

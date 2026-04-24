@@ -1,18 +1,20 @@
 from django.contrib import admin
-from .models import TeamType, Department, Team, Dependency
-
-@admin.register(TeamType)
-class TeamTypeAdmin(admin.ModelAdmin):
-    list_display = ['name']
-
-@admin.register(Department)
-class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'specialisation', 'leader']
+from .models import Team, Skill
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'department', 'team_type', 'created_at']
+    # This controls what columns show up in the admin list
+    list_display = ('team_name', 'department', 'manager')
+    
+    # This adds a search bar to the admin panel
+    search_fields = ('team_name', 'department')
+    
+    # This adds a filter sidebar on the right
+    list_filter = ('department', 'skills')
+    
+    # This makes the Many-to-Many skills selection much easier to use
+    filter_horizontal = ('skills',)
 
-@admin.register(Dependency)
-class DependencyAdmin(admin.ModelAdmin):
-    list_display = ['from_team', 'to_team', 'dependency_type']
+@admin.register(Skill)
+class SkillAdmin(admin.ModelAdmin):
+    search_fields = ('name',)

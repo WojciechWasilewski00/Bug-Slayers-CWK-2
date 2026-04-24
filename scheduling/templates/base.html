@@ -1,160 +1,155 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bug Slayers - Dashboard</title>
     <style>
-        :root {
-            --sidebar-width: 250px;
-            --primary-color: #5d87ff;
-            --hover-color: #ecf2ff;
-            --text-dark: #2a3547;
-            --text-gray: #5a6a85;
-            --danger-red: #fa5252;
-        }
+      :root {
+        --sidebar-width: 250px;
+        --primary-color: #5d87ff;
+        --hover-color: #ecf2ff;
+        --text-dark: #2a3547;
+        --text-gray: #5a6a85;
+        --danger-red: #fa5252;
+      }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            background-color: #f8f9fa;
-        }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        background-color: #f8f9fa;
+      }
 
-        /* Sidebar Styling */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: white;
-            border-right: 1px solid #e5eaef;
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-        }
+      /* Sidebar Styling */
+      .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+        background: white;
+        border-right: 1px solid #e5eaef;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .brand {
-            padding: 25px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
+      .brand {
+        padding: 25px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-dark);
+      }
 
-        .brand span { color: var(--primary-color); }
+      .brand span {
+        color: var(--primary-color);
+      }
 
-        .nav-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex-grow: 1;
-        }
+      .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+      }
 
-        .nav-section-title {
-            padding: 15px 25px 5px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-gray);
-            text-transform: uppercase;
-        }
+      .nav-section-title {
+        padding: 15px 25px 5px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-gray);
+        text-transform: uppercase;
+      }
 
-        .nav-item {
-            padding: 5px 20px;
-        }
+      .nav-item {
+        padding: 5px 20px;
+      }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: var(--text-dark);
-            border-radius: 7px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: var(--text-dark);
+        border-radius: 7px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
 
-        .nav-link:hover {
-            background-color: var(--hover-color);
-            color: var(--primary-color);
-        }
+      .nav-link:hover {
+        background-color: var(--hover-color);
+        color: var(--primary-color);
+      }
 
-        /* The Special Logout Button Styling */
-        .logout-form {
-            margin: 0;
-            padding: 20px;
-            border-top: 1px solid #eee;
-        }
+      /* The Special Logout Button Styling */
+      .logout-form {
+        margin: 0;
+        padding: 20px;
+        border-top: 1px solid #eee;
+      }
 
-        .logout-btn {
-            width: 100%;
-            background: #fff5f5;
-            color: var(--danger-red);
-            border: 1px solid #ffc9c9;
-            padding: 12px;
-            border-radius: 7px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.2s;
-        }
+      .logout-btn {
+        width: 100%;
+        background: #fff5f5;
+        color: var(--danger-red);
+        border: 1px solid #ffc9c9;
+        padding: 12px;
+        border-radius: 7px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: 0.2s;
+      }
 
-        .logout-btn:hover {
-            background: var(--danger-red);
-            color: white;
-        }
+      .logout-btn:hover {
+        background: var(--danger-red);
+        color: white;
+      }
 
-        /* Main Content Area */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            flex-grow: 1;
-            padding: 40px;
-        }
+      /* Main Content Area */
+      .main-content {
+        margin-left: var(--sidebar-width);
+        flex-grow: 1;
+        padding: 40px;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="sidebar">
-        <div class="brand"><span>BUG</span>SLAYERS</div>
+      <div class="brand"><span>BUG</span>SLAYERS</div>
 
-        <nav class="nav-list">
-            <div class="nav-section-title">Home</div>
-            <div class="nav-item">
-                <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
-            </div>
-
-            <div class="nav-section-title">Team Management</div>
-            <div class="nav-item">
-                <a href="{% url 'team_list' %}" class="nav-link">👥 Teams</a>
-            </div>
-            <div class="nav-item">
-                <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
-            </div>
-
-            <div class="nav-section-title">Apps</div>
-            <div class="nav-item">
-                <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
-            </div>
-            <div class="nav-item">
-                <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
-            </div>
-        </nav>
-
-        <div class="logout-form">
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="logout-btn">
-                    Logout
-                </button>
-            </form>
+      <nav class="nav-list">
+        <div class="nav-section-title">Home</div>
+        <div class="nav-item">
+          <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
         </div>
+
+        <div class="nav-section-title">Team Management</div>
+        <div class="nav-item">
+          <a href="{% url 'team_page' %}" class="nav-link">👥 Teams</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
+        </div>
+
+        <div class="nav-section-title">Apps</div>
+        <div class="nav-item">
+          <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
+        </div>
+      </nav>
+
+      <div class="logout-form">
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
     </div>
 
-    <div class="main-content">
-        {% block content %}
-        {% endblock %}
-    </div>
-
-</body>
+    <div class="main-content">{% block content %} {% endblock %}</div>
+  </body>
 </html>

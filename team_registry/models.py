@@ -1,54 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class TeamType(models.Model):
-    name = models.CharField(max_length=100, help_text="e.g. Frontend, Backend, QA")
+# Author: [Wojciech Wasileski]
+
+# ID: [w2083613]
+
+# Contribution: Backend Models for Team Management (CWK2)
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name_plural = "Team Types"
-
-
-class Department(models.Model):
-    name = models.CharField(max_length=100, help_text="e.g. Engineering, Design")
-    specialisation = models.CharField(max_length=200, blank=True, null=True)
-    leader = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='led_departments')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "Departments"
-
 
 class Team(models.Model):
-    name = models.CharField(max_length=100, help_text="e.g. Bug Slayers Front End")
-    description = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True, related_name='teams')
-    team_type = models.ForeignKey(TeamType, on_delete=models.SET_NULL, null=True, blank=True, related_name='teams')
+    team_name = models.CharField(max_length=255)
+    department = models.CharField(max_length=255, blank=True, null=True)
+    team_description = models.TextField(blank=True)
+    manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='managed_teams')
+    dependencies = models.TextField(blank=True)      # The "Downstream Dependencies" column
+    dependency_type = models.CharField(max_length=255, blank=True, null=True) # The "Dependency Type" column
+    
+    # This single line handles the relationship for both Team and Skill
+    skills = models.ManyToManyField(Skill, related_name='teams')
 
     def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "Teams"
-
-
-class Dependency(models.Model):
-    DEPENDENCY_TYPES = [
-        ('upstream', 'Upstream'),
-        ('downstream', 'Downstream'),
-    ]
-    from_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='dependencies_from')
-    to_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='dependencies_to')
-    dependency_type = models.CharField(max_length=20, choices=DEPENDENCY_TYPES)
-    description = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.from_team} → {self.to_team} ({self.dependency_type})"
-
-    class Meta:
-        verbose_name_plural = "Dependencies"
+        return self.team_name
