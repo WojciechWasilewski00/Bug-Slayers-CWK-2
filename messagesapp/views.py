@@ -9,22 +9,17 @@ from .models import Message
 from .forms import MessageForm
 
 
-
 def inbox(request):
-    # Temporary test user
-    current_user = User.objects.get(username="2.Mariam_W2074138")
+    current_user = request.user
 
-    # Get this user's team
-    current_team = Team.objects.get(manager=current_user)
-
-    # Show only messages sent to this team
     inbox_messages = Message.objects.filter(
         message_status='sent',
-        team=current_team
+        team__manager=current_user
     )
 
     return render(request, 'messagesapp/inbox.html', {
         'messages': inbox_messages
+        
     })
 
 def new_message(request):
@@ -35,7 +30,8 @@ def new_message(request):
             msg = form.save(commit=False)
 
             # Temporary test sender user
-            msg.sender = User.objects.get(username="1.Mariam_W2074138")
+            #msg.sender = User.objects.get(username="1.Mariam_W2074138")
+            current_user = request.user
 
             action = request.POST.get('action')
 
@@ -63,16 +59,21 @@ def sent(request):
     if request.GET.get('sent') == '1':
         success_message = "Message sent successfully"
 
-    sent_messages = Message.objects.filter(message_status='sent')
+    sent_messages = Message.objects.filter(
+        message_status='sent',
+        sender=request.user
+    )
 
     return render(request, 'messagesapp/sent.html', {
         'success_message': success_message,
         'messages': sent_messages
     })
 
-
 def drafts(request):
-    draft_messages = Message.objects.filter(message_status='draft')
+    draft_messages = Message.objects.filter(
+        message_status='draft',
+        sender=request.user
+    )
 
     return render(request, 'messagesapp/drafts.html', {
         'messages': draft_messages
