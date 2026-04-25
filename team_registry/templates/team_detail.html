@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,6 +28,7 @@
         margin: 0;
         font-family: "Plus Jakarta Sans", sans-serif;
       }
+
       .sidebar {
         width: 270px;
         background-color: var(--sidebar-bg);
@@ -37,13 +39,20 @@
         flex-direction: column;
         z-index: 1000;
       }
+
       .sidebar-brand {
-        padding: 30px 25px;
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #2a3547;
-        letter-spacing: -0.5px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
       }
+      .brand-logo {
+        height: 40px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+
       .nav-section-title {
         font-size: 0.7rem;
         font-weight: 700;
@@ -64,7 +73,7 @@
         font-weight: 500;
         font-size: 0.95rem;
         border-radius: 7px;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s;
       }
       .sidebar a:hover,
       .sidebar a.active {
@@ -76,12 +85,37 @@
         width: 30px;
         font-size: 1.1rem;
       }
-      .main-content {
+
+      .main-wrapper {
         margin-left: 270px;
         flex-grow: 1;
-        padding: 40px;
         width: calc(100% - 270px);
+        display: flex;
+        flex-direction: column;
       }
+
+      .top-nav-bar {
+        background: #ffffff;
+        padding: 15px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eef2f6;
+        position: sticky;
+        top: 0;
+        z-index: 998;
+      }
+      .top-nav-links a {
+        text-decoration: none;
+        color: var(--sidebar-text);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-right: 25px;
+      }
+      .main-content {
+        padding: 40px;
+      }
+
       .custom-card {
         background: white;
         border-radius: 15px;
@@ -98,30 +132,68 @@
         border-bottom: 3px solid var(--accent-color);
         background: none;
       }
+
+      .btn-header-action {
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 10px 18px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+      .btn-schedule-alt {
+        background-color: #f6f9fc;
+        color: var(--accent-color);
+        border: 1px solid #eef2f6;
+      }
+      .mt-auto {
+        margin-top: auto;
+      }
+
+      .skill-badge {
+        background-color: #ecf2ff;
+        color: var(--accent-color);
+        border: 1px solid #d1e1ff;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: 8px;
+      }
     </style>
   </head>
   <body>
     <div class="sidebar">
-      <div class="sidebar-brand">
-        <span style="color: var(--accent-color)">BUG</span>SLAYERS
-      </div>
+      <a href="/" class="sidebar-brand">
+        <img
+          src="{% static 'logo.png' %}"
+          alt="Bug Slayers Logo"
+          class="brand-logo"
+        />
+      </a>
 
       <div class="flex-grow-1">
         <div class="nav-section-title">Home</div>
-        <a href="/"><span class="icon-wrapper">🏠</span> Dashboard</a>
-
+        <a href="{% url 'dashboard' %}"
+          ><span class="icon-wrapper">🏠</span> Dashboard</a
+        >
         <div class="nav-section-title">Schedule</div>
         <a href="{% url 'weekly_schedule' %}"
           ><span class="icon-wrapper">📅</span> Weekly Schedule</a
         >
         <a href="#"><span class="icon-wrapper">➕</span> Schedule</a>
-
         <div class="nav-section-title">Team Workspace</div>
         <a href="{% url 'team_page' %}" class="active"
           ><span class="icon-wrapper">👥</span> Teams</a
         >
         <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-        <a href="#"><span class="icon-wrapper">📩</span> Messages</a>
+        <a href="{% url 'inbox' %}"
+          ><span class="icon-wrapper">📩</span> Messages</a
+        >
       </div>
 
       <div class="mt-auto border-top pt-3 pb-4">
@@ -133,79 +205,148 @@
       </div>
     </div>
 
-    <div class="main-content">
-      <div class="mb-4">
-        <a
-          href="{% url 'team_page' %}"
-          class="text-decoration-none text-muted fw-bold small"
-          >← BACK TO REGISTRY</a
-        >
+    <div class="main-wrapper">
+      <div class="top-nav-bar">
+        <div class="top-nav-links">
+          <a href="{% url 'dashboard' %}">Home</a>
+          <a href="#">Service</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+
+        <div class="user-profile">
+          {% if user.is_authenticated %}
+          <span class="text-muted me-3 small"
+            >Hello, <b>{{ user.username }}</b></span
+          >
+          <form action="{% url 'logout' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              Logout
+            </button>
+          </form>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
+          {% endif %}
+        </div>
       </div>
 
-      <div class="custom-card shadow-sm">
-        <h1 class="fw-bold text-dark mb-1">{{ team.team_name }}</h1>
-        <p class="text-primary fw-bold mb-4">{{ team.department }}</p>
+      <div class="main-content">
+        <div class="mb-4">
+          <a
+            href="{% url 'team_page' %}"
+            class="text-decoration-none text-muted fw-bold small"
+            >← BACK TO REGISTRY</a
+          >
+        </div>
 
-        <ul class="nav nav-tabs mb-4" id="detailTabs" role="tablist">
-          <li class="nav-item">
-            <button
-              class="nav-link active"
-              id="focus-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#focus"
-              type="button"
-            >
-              Focus Areas
-            </button>
-          </li>
-          <li class="nav-item">
-            <button
-              class="nav-link"
-              id="people-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#people"
-              type="button"
-            >
-              Personnel
-            </button>
-          </li>
-          <li class="nav-item">
-            <button
-              class="nav-link"
-              id="dep-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#dep"
-              type="button"
-            >
-              Dependencies
-            </button>
-          </li>
-        </ul>
+        <div class="custom-card shadow-sm">
+          <div class="d-flex justify-content-between align-items-start mb-1">
+            <div>
+              <h1 class="fw-bold text-dark mb-1">{{ team.team_name }}</h1>
+              <p class="text-primary fw-bold mb-4">{{ team.department }}</p>
+            </div>
 
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="focus">
-            <h5 class="fw-bold">Development Focus</h5>
-            <p class="text-muted">
-              {{ team.team_description|default:"No description provided." }}
-            </p>
+            <div class="d-flex gap-2">
+              <a
+                href="{% url 'weekly_schedule' %}?team={{ team.team_name }}"
+                class="btn-header-action btn-schedule-alt"
+                >📅 Schedule Meeting</a
+              >
+              <a
+                href="{% url 'inbox' %}?to={{ team.team_name }}"
+                class="btn btn-primary btn-header-action"
+                >📩 Contact Team</a
+              >
+            </div>
           </div>
-          <div class="tab-pane fade" id="people">
-            <h5 class="fw-bold">Team Leader</h5>
-            <p class="fw-bold text-dark p-3 bg-light rounded shadow-xs">
-              {{ team.manager.first_name|default:team.manager.username }}
-            </p>
-          </div>
-          <div class="tab-pane fade" id="dep">
-            <h5 class="fw-bold mb-3">Dependencies</h5>
-            <span class="badge bg-primary mb-2 shadow-sm"
-              >{{ team.dependency_type }}</span
-            >
-            <p class="text-dark">{{ team.dependencies }}</p>
+
+          <ul class="nav nav-tabs mb-4" id="detailTabs" role="tablist">
+            <li class="nav-item">
+              <button
+                class="nav-link active"
+                id="focus-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#focus"
+                type="button"
+              >
+                Focus Areas
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                id="skills-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#skills"
+                type="button"
+              >
+                Skills
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                id="people-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#people"
+                type="button"
+              >
+                Personnel
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                id="dep-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#dep"
+                type="button"
+              >
+                Dependencies
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="focus">
+              <h5 class="fw-bold">Development Focus</h5>
+              <p class="text-muted">
+                {{ team.team_description|default:"No description provided." }}
+              </p>
+            </div>
+
+            <div class="tab-pane fade" id="skills">
+              <h5 class="fw-bold mb-3">Core Expertise</h5>
+              <div class="d-flex flex-wrap">
+                {% if team.skills %} {% for skill in team.skills.split %}
+                <span class="skill-badge">{{ skill|title }}</span>
+                {% endfor %} {% else %}
+                <p class="text-muted small">
+                  No specific skills listed for this team.
+                </p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="people">
+              <h5 class="fw-bold">Team Leader</h5>
+              <p class="fw-bold text-dark p-3 bg-light rounded shadow-xs">
+                {{ team.manager.username }}
+              </p>
+            </div>
+
+            <div class="tab-pane fade" id="dep">
+              <h5 class="fw-bold mb-3">Dependencies</h5>
+              <span class="badge bg-primary mb-2 shadow-sm"
+                >{{ team.dependency_type }}</span
+              >
+              <p class="text-dark">{{ team.dependencies }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
