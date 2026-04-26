@@ -333,10 +333,10 @@
 
         <div class="tabs-card">
           <div class="tabs-bar">
-            <a href="{% url 'new_message' %}" class="tab-link {% if request.resolver_match.url_name == 'new_message' %}active{% endif %}">New Message</a>
-            <a href="{% url 'inbox' %}" class="tab-link {% if request.resolver_match.url_name == 'inbox' %}active{% endif %}">Inbox</a>
-            <a href="{% url 'sent' %}" class="tab-link {% if request.resolver_match.url_name == 'sent' %}active{% endif %}">Sent</a>
-            <a href="{% url 'drafts' %}" class="tab-link {% if request.resolver_match.url_name == 'drafts' %}active{% endif %}">Drafts</a>
+            <a href="{% url 'new_message' %}" class="tab-link">New Message</a>
+            <a href="{% url 'inbox' %}" class="tab-link">Inbox</a>
+            <a href="{% url 'sent' %}" class="tab-link">Sent</a>
+            <a href="{% url 'drafts' %}" class="tab-link">Drafts</a>
           </div>
         </div>
 

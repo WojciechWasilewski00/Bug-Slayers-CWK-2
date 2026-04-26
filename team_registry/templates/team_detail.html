@@ -681,23 +681,18 @@
           <a href="#">Portfolio</a>
           <a href="#">Contact</a>
         </div>
-
-        <div class="user-profile">
+        
+        <div class="topbar-right">
           {% if user.is_authenticated %}
-          <span class="text-muted me-3 small"
-            >Hello, <b>{{ user.username }}</b></span
-          >
-          <form action="{% url 'logout' %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-              Logout
-            </button>
-          </form>
+            <span>Hello, <strong>{{ user.username }}</strong></span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+            </form>
           {% else %}
-          <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
+            <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
           {% endif %}
         </div>
-      </div>
 
       <div class="main-content">
         <div class="mb-4">

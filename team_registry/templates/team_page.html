@@ -209,26 +209,15 @@
           <a href="#">Contact</a>
         </div>
 
-        <div class="user-profile d-flex align-items-center">
+        <div class="topbar-right">
           {% if user.is_authenticated %}
-          <span class="text-muted me-3 small"
-            >Hello, <b>{{ user.username }}</b></span
-          >
-          <form action="{% url 'logout' %}" method="post" class="m-0">
-            {% csrf_token %}
-            <button
-              type="submit"
-              class="btn btn-sm btn-outline-danger px-3 fw-bold"
-            >
-              Logout
-            </button>
-          </form>
+            <span>Hello, <strong>{{ user.username }}</strong></span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+            </form>
           {% else %}
-          <a
-            href="{% url 'login' %}"
-            class="btn btn-sm btn-primary px-4 fw-bold"
-            >Login</a
-          >
+            <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
           {% endif %}
         </div>
       </nav>
