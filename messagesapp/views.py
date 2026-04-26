@@ -78,3 +78,14 @@ def drafts(request):
     return render(request, 'messagesapp/drafts.html', {
         'messages': draft_messages
     })
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def inbox(request):
+    # Your existing code here...
+    inbox_messages = Message.objects.filter(
+        message_status='sent',
+        team__manager=request.user  
+        )
+   

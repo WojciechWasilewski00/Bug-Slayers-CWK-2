@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -164,6 +165,465 @@
         margin-right: 8px;
         margin-bottom: 8px;
       }
+
+      /* Dependencies Tab Container */
+      .dep-container {
+        padding: 1.5rem;
+      }
+
+      /* Toolbar Styling */
+      .dep-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        background: #ffffff;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+      }
+
+      .dep-filter-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* Buttons */
+      .dep-btn {
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+
+      .dep-btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+      }
+
+      .dep-btn-outline {
+        background-color: transparent;
+        color: #6c757d;
+        border: 1px solid #dee2e6;
+      }
+
+      .dep-btn:hover {
+        opacity: 0.9;
+      }
+
+      /* Search Bar */
+      .dep-search-input {
+        width: 220px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: 1px solid #dee2e6;
+        font-size: 0.875rem;
+      }
+
+      /* Table Card */
+      .dep-table-card {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        overflow-x: auto;
+      }
+
+      .dep-table {
+        width: 100%;
+        border-collapse: collapse;
+        vertical-align: middle;
+      }
+
+      .dep-table th {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 12px 20px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .dep-table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      /* Team & Manager Info Layout */
+      .dep-team-info,
+      .dep-manager-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .dep-team-name {
+        font-weight: 600;
+        color: #343a40;
+      }
+
+      .dep-icon-box {
+        width: 38px;
+        height: 38px;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-size: 1.2rem;
+      }
+
+      /* Avatars (No Image Fallback) */
+      .dep-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .avatar-gray {
+        background-color: #6c757d;
+      }
+      .avatar-purple {
+        background-color: #6f42c1;
+      }
+
+      /* Badges */
+      .dep-badge {
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .badge-upstream {
+        background-color: #e7f0ff;
+        color: #007bff;
+        border: 1px solid #cce0ff;
+      }
+
+      .badge-downstream {
+        background-color: #f3e8ff;
+        color: #6f42c1;
+        border: 1px solid #e2d1ff;
+      }
+
+      .badge-active {
+        background-color: #d1f7e4;
+        color: #0f5132;
+      }
+
+      .dep-action-btn {
+        background: none;
+        border: none;
+        color: #adb5bd;
+        cursor: pointer;
+        font-size: 0.875rem;
+      }
+
+      .dep-action-btn:hover {
+        color: #007bff;
+      }
+
+      /* Card Styling */
+      .overview-card,
+      .info-item-card {
+        background: #ffffff;
+        border: 1px solid #e3e6f0;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      }
+
+      .card-title-custom {
+        color: #4e73df;
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .description-content {
+        line-height: 1.7;
+        color: #5a5c69;
+        font-size: 1rem;
+      }
+
+      /* Info Grid Styling */
+      .info-item-card {
+        display: flex;
+        align-items: center;
+        transition: transform 0.2s;
+      }
+
+      .info-item-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .info-icon {
+        font-size: 2rem;
+        margin-right: 20px;
+        background: #f8f9fc;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      .info-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .info-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #858796;
+        font-weight: 800;
+      }
+
+      .info-value {
+        font-size: 1.1rem;
+        color: #2e2f37;
+        font-weight: 600;
+      }
+
+      /* Skills Section Styling */
+      .skills-container {
+        padding: 2rem;
+        background-color: #ffffff;
+      }
+
+      .skills-header {
+        margin-bottom: 2rem;
+      }
+
+      .skills-title {
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 0.25rem;
+      }
+
+      .skills-subtitle {
+        color: #636e72;
+        font-size: 0.9rem;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .category-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #b2bec3;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /* Fancy Skill Badge */
+      .skill-tag {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #2d3436;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .skill-tag:hover {
+        background: #ffffff;
+        border-color: #007bff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+      }
+
+      /* Status Dots */
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot.blue {
+        background-color: #007bff;
+      }
+      .dot.purple {
+        background-color: #6f42c1;
+      }
+
+      .personnel-container {
+        padding: 2rem;
+        background-color: #fcfcfc;
+      }
+
+      .personnel-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .member-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border: 1px solid #f0f0f0;
+      }
+
+      .member-avatar {
+        width: 60px;
+        height: 60px;
+        background: #e9ecef;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .avatar-placeholder {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #adb5bd;
+      }
+
+      .member-name {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2d3436;
+      }
+
+      .member-role {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #636e72;
+      }
+
+      /* Container and Layout */
+      .personnel-section {
+        padding: 30px;
+        background-color: #fcfcfc;
+        min-height: 400px;
+      }
+
+      .personnel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .personnel-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      /* Filter Pills */
+      .badge-pill {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        margin-right: 10px;
+        background: #f1f2f6;
+        color: #57606f;
+        font-weight: 500;
+      }
+
+      .badge-pill.active {
+        background: #007bff;
+        color: white;
+      }
+
+      /* Member Cards */
+      .personnel-card {
+        background: white;
+        border: 1px solid #edf2f7;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        transition: transform 0.2s ease;
+      }
+
+      .personnel-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Avatar Circle */
+      .avatar-circle {
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      /* Text Styling */
+      .name-text {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #2d3436;
+        font-weight: 600;
+      }
+
+      .role-text {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #b2bec3;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* Search Bar */
+      .search-input {
+        border: 1px solid #dfe6e9;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        width: 220px;
+      }
     </style>
   </head>
   <body>
@@ -185,7 +645,6 @@
         <a href="{% url 'weekly_schedule' %}"
           ><span class="icon-wrapper">📅</span> Weekly Schedule</a
         >
-        <a href="#"><span class="icon-wrapper">➕</span> Schedule</a>
         <div class="nav-section-title">Team Workspace</div>
         <a href="{% url 'team_page' %}" class="active"
           ><span class="icon-wrapper">👥</span> Teams</a
@@ -254,7 +713,7 @@
                 >📅 Schedule Meeting</a
               >
               <a
-                href="{% url 'inbox' %}?to={{ team.team_name }}"
+                href="{% url 'inbox' %}"
                 class="btn btn-primary btn-header-action"
                 >📩 Contact Team</a
               >
@@ -267,10 +726,10 @@
                 class="nav-link active"
                 id="focus-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#focus"
+                data-bs-target="#overview"
                 type="button"
               >
-                Focus Areas
+                Overview
               </button>
             </li>
             <li class="nav-item">
@@ -289,10 +748,10 @@
                 class="nav-link"
                 id="people-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#people"
+                data-bs-target="#personnel"
                 type="button"
               >
-                Personnel
+                Members
               </button>
             </li>
             <li class="nav-item">
@@ -300,7 +759,7 @@
                 class="nav-link"
                 id="dep-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#dep"
+                data-bs-target="#dependencies"
                 type="button"
               >
                 Dependencies
@@ -309,39 +768,222 @@
           </ul>
 
           <div class="tab-content">
-            <div class="tab-pane fade show active" id="focus">
-              <h5 class="fw-bold">Development Focus</h5>
-              <p class="text-muted">
-                {{ team.team_description|default:"No description provided." }}
-              </p>
-            </div>
+            <div
+              class="tab-pane fade show active"
+              id="overview"
+              role="tabpanel"
+            >
+              <div class="overview-card mb-4">
+                <h5 class="card-title-custom">About the Team</h5>
+                <div class="description-content">
+                  {{ team.team_description|default:"No description provided." }}
+                </div>
+              </div>
 
-            <div class="tab-pane fade" id="skills">
-              <h5 class="fw-bold mb-3">Core Expertise</h5>
-              <div class="d-flex flex-wrap">
-                {% if team.skills %} {% for skill in team.skills.split %}
-                <span class="skill-badge">{{ skill|title }}</span>
-                {% endfor %} {% else %}
-                <p class="text-muted small">
-                  No specific skills listed for this team.
-                </p>
-                {% endif %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="info-item-card">
+                    <div class="info-icon">👤</div>
+                    <div class="info-details">
+                      <span class="info-label">Team Leader</span>
+                      <span class="info-value"
+                        >{{ team.team_lead_name|default:"TBD" }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div class="info-item-card">
+                    <div class="info-icon">👔</div>
+                    <div class="info-details">
+                      <span class="info-label">Department Head</span>
+                      <span class="info-value"
+                        >{{ team.dept_head_name|default:"TBD" }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div class="info-item-card">
+                    <div class="info-icon">🏢</div>
+                    <div class="info-details">
+                      <span class="info-label">Department</span>
+                      <span class="info-value">{{ team.department }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div class="info-item-card">
+                    <div class="info-icon">🚀</div>
+                    <div class="info-details">
+                      <span class="info-label">Jira Project</span>
+                      <span class="info-value">
+                        {% if team.jira_board_link %}
+                        <a
+                          href="{{ team.jira_board_link }}"
+                          target="_blank"
+                          class="jira-link"
+                        >
+                          {{ team.jira_project_name|default:"View Jira Board" }}
+                          <small>↗</small>
+                        </a>
+                        {% else %} {{ team.jira_project_name|default:"Not
+                        Linked" }} {% endif %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="tab-pane fade" id="people">
-              <h5 class="fw-bold">Team Leader</h5>
-              <p class="fw-bold text-dark p-3 bg-light rounded shadow-xs">
-                {{ team.manager.username }}
-              </p>
+            <div class="tab-pane fade" id="skills" role="tabpanel">
+              <div class="skills-container">
+                <div class="skills-header">
+                  <h5 class="skills-title">Key Skills & Technologies</h5>
+                  <p class="skills-subtitle">
+                    Primary expertise for <strong>{{ team.team_name }}</strong>.
+                  </p>
+                </div>
+
+                <div class="skills-grid">
+                  <div class="skill-category">
+                    <h6 class="category-label">Technical Proficiency</h6>
+                    <div class="skill-tags">
+                      {% for skill in skills %}
+                      <span class="skill-tag">
+                        <i class="dot blue"></i> {{ skill.name }}
+                      </span>
+                      {% empty %}
+                      <p class="text-muted">No skills assigned to this team.</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="tab-pane fade" id="dep">
-              <h5 class="fw-bold mb-3">Dependencies</h5>
-              <span class="badge bg-primary mb-2 shadow-sm"
-                >{{ team.dependency_type }}</span
-              >
-              <p class="text-dark">{{ team.dependencies }}</p>
+            <div
+              class="tab-pane fade"
+              id="personnel"
+              role="tabpanel"
+              aria-labelledby="personnel-tab"
+            >
+              <div class="personnel-section">
+                <div class="personnel-header">
+                  <div class="filter-pills">
+                    <span class="badge-pill active">All Roles</span>
+                    <span class="badge-pill">Management</span>
+                  </div>
+                  <div class="search-bar">
+                    <input
+                      type="text"
+                      placeholder="Search members..."
+                      class="search-input"
+                    />
+                  </div>
+                </div>
+
+                <div class="personnel-grid">
+                  {% if team.dept_head_name %}
+                  <div class="personnel-card">
+                    <div class="avatar-circle">
+                      {{ team.dept_head_name|slice:":1" }}
+                    </div>
+                    <div class="personnel-details">
+                      <h5 class="name-text">{{ team.dept_head_name }}</h5>
+                      <p class="role-text">Department Head</p>
+                    </div>
+                  </div>
+                  {% endif %} {% if team.team_lead_name %}
+                  <div class="personnel-card">
+                    <div class="avatar-circle">
+                      {{ team.team_lead_name|slice:":1" }}
+                    </div>
+                    <div class="personnel-details">
+                      <h5 class="name-text">{{ team.team_lead_name }}</h5>
+                      <p class="role-text">Team Leader</p>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="dependencies" role="tabpanel">
+              <div class="dep-container">
+                <div class="dep-toolbar">
+                  <div class="dep-filter-group">
+                    <button class="dep-btn dep-btn-primary">↑ Upstream</button>
+                    <button class="dep-btn dep-btn-outline">
+                      ↓ Downstream
+                    </button>
+                  </div>
+                  <div class="dep-search-wrapper">
+                    <input
+                      type="text"
+                      class="dep-search-input"
+                      placeholder="Search teams..."
+                    />
+                  </div>
+                </div>
+
+                <div class="dep-table-card">
+                  <table class="dep-table">
+                    <thead>
+                      <tr>
+                        <th class="text-start">TEAM NAME</th>
+                        <th>TYPE</th>
+                        <th>MANAGER</th>
+                        <th>STATUS</th>
+                        <th class="text-end">ACTIONS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for dep in dependencies %}
+                      <tr>
+                        <td class="text-start">
+                          <div class="dep-team-info">
+                            <div class="dep-icon-box">🤝</div>
+                            <span class="dep-team-name"
+                              >{{ dep.to_team.team_name }}</span
+                            >
+                          </div>
+                        </td>
+                        <td>
+                          <span
+                            class="badge {% if dep.dependency_type == 'upstream' %}bg-info{% else %}bg-warning{% endif %}"
+                          >
+                            {{ dep.dependency_type|upper }}
+                          </span>
+                        </td>
+                        <td>
+                          {{ team.team_lead_name|default:"No Lead Assigned" }}
+                        </td>
+                        <td>
+                          <span class="status-indicator active"></span> Active
+                        </td>
+                        <td class="text-end">
+                          <a
+                            href="{% url 'team_detail' dep.to_team.id %}"
+                            class="btn btn-sm btn-outline-primary"
+                            >View</a
+                          >
+                        </td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+                        <td colspan="5" class="text-center text-muted">
+                          No dependencies found.
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>

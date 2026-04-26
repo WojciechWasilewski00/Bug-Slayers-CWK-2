@@ -17,4 +17,5 @@ urlpatterns = [
     path('sent/', views.sent, name='sent'),
     # Route for viewing draft messages
     path('drafts/', views.drafts, name='drafts'),
+    # messagesapp/urls.py
 ]
