@@ -1,5 +1,11 @@
+# Author: [Wojciech Wasileski]
+
+# ID: [w2083613]
+
+# Contribution: Backend Models for Team Management (CWK2)
+
 from django.contrib import admin
-from .models import Team, Skill
+from .models import Team, Skill, TeamDependency
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
