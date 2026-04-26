@@ -3,25 +3,26 @@
 # Contribution: Backend Logic for Messages Management (CWK2)
 
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from team_registry.models import Team
+from django.contrib.auth.decorators import login_required
+
 from .models import Message
 from .forms import MessageForm
 
 
+@login_required
 def inbox(request):
-    current_user = request.user
-
+    # Show messages sent to teams managed by the logged-in user
     inbox_messages = Message.objects.filter(
         message_status='sent',
-        team__manager=current_user
+        team__manager=request.user
     )
 
     return render(request, 'messagesapp/inbox.html', {
         'messages': inbox_messages
-        
     })
 
+
+@login_required
 def new_message(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -29,9 +30,8 @@ def new_message(request):
         if form.is_valid():
             msg = form.save(commit=False)
 
-            # Temporary test sender user
-            #msg.sender = User.objects.get(username="1.Mariam_W2074138")
-            current_user = request.user
+            # Set the sender as the logged-in user
+            msg.sender = request.user
 
             action = request.POST.get('action')
 
@@ -53,12 +53,14 @@ def new_message(request):
     })
 
 
+@login_required
 def sent(request):
     success_message = None
 
     if request.GET.get('sent') == '1':
         success_message = "Message sent successfully"
 
+    # Show only messages sent by the logged-in user
     sent_messages = Message.objects.filter(
         message_status='sent',
         sender=request.user
@@ -69,7 +71,10 @@ def sent(request):
         'messages': sent_messages
     })
 
+
+@login_required
 def drafts(request):
+    # Show only drafts created by the logged-in user
     draft_messages = Message.objects.filter(
         message_status='draft',
         sender=request.user
@@ -78,14 +83,3 @@ def drafts(request):
     return render(request, 'messagesapp/drafts.html', {
         'messages': draft_messages
     })
-
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def inbox(request):
-    # Your existing code here...
-    inbox_messages = Message.objects.filter(
-        message_status='sent',
-        team__manager=request.user  
-        )
-   

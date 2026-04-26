@@ -624,36 +624,45 @@
         font-size: 0.9rem;
         width: 220px;
       }
+      .brand-logo {
+        height: 40px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
     </style>
   </head>
   <body>
     <div class="sidebar">
-      <a href="/" class="sidebar-brand">
-        <img
-          src="{% static 'logo.png' %}"
-          alt="Bug Slayers Logo"
-          class="brand-logo"
-        />
+      <a href="{% url 'dashboard' %}" class="sidebar-brand">
+        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
       </a>
-
+  
       <div class="flex-grow-1">
-        <div class="nav-section-title">Home</div>
-        <a href="{% url 'dashboard' %}"
-          ><span class="icon-wrapper">🏠</span> Dashboard</a
-        >
-        <div class="nav-section-title">Schedule</div>
-        <a href="{% url 'weekly_schedule' %}"
-          ><span class="icon-wrapper">📅</span> Weekly Schedule</a
-        >
-        <div class="nav-section-title">Team Workspace</div>
-        <a href="{% url 'team_page' %}" class="active"
-          ><span class="icon-wrapper">👥</span> Teams</a
-        >
+        <a href="{% url 'dashboard' %}">
+          <span class="icon-wrapper">🏠</span> Dashboard
+        </a>
+  
+        <a href="{% url 'team_page' %}">
+          <span class="icon-wrapper">👥</span> Teams
+        </a>
         <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-        <a href="{% url 'inbox' %}"
-          ><span class="icon-wrapper">📩</span> Messages</a
-        >
+  
+        <a href="{% url 'weekly_schedule' %}">
+          <span class="icon-wrapper">📅</span> Schedule
+        </a>
+        <a href="{% url 'inbox' %}">
+          <span class="icon-wrapper">📩</span> Messages
+        </a>
+  
       </div>
+  
+    
+        <a href="#">
+          <span class="icon-wrapper">⚙️</span> Settings
+        </a>
+      </div>
+    
 
       <div class="mt-auto border-top pt-3 pb-4">
         <div class="nav-section-title">Administration</div>

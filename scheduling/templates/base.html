@@ -117,29 +117,35 @@
   </head>
   <body>
     <div class="sidebar">
-      <div class="brand"><span>BUG</span>SLAYERS</div>
-
-      <nav class="nav-list">
-        <div class="nav-section-title">Home</div>
-        <div class="nav-item">
-          <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
-        </div>
-
-        <div class="nav-section-title">Team Management</div>
-        <div class="nav-item">
-          <a href="{% url 'team_page' %}" class="nav-link">👥 Teams</a>
-        </div>
-        <div class="nav-item">
-          <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
-        </div>
-
-        <div class="nav-section-title">Apps</div>
-        <div class="nav-item">
-          <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
-        </div>
-        <div class="nav-item">
-          <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
-        </div>
+      <div class="sidebar-brand">
+        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
+      </div>
+  
+      <div class="flex-grow-1">
+        <a href="{% url 'dashboard' %}">
+          <span class="icon-wrapper">🏠</span> Dashboard
+        </a>
+  
+        <a href="{% url 'team_page' %}">
+          <span class="icon-wrapper">👥</span> Teams
+        </a>
+        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+  
+        <a href="{% url 'weekly_schedule' %}">
+          <span class="icon-wrapper">📅</span> Schedule
+        </a>
+        <a href="{% url 'inbox' %}">
+          <span class="icon-wrapper">📩</span> Messages
+        </a>
+  
+      </div>
+  
+    
+        <a href="#">
+          <span class="icon-wrapper">⚙️</span> Settings
+        </a>
+      </div>
+  
       </nav>
 
       <div class="logout-form">

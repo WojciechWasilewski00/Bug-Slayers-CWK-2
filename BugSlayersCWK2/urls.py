@@ -25,6 +25,7 @@ urlpatterns = [
     # 2. Authentication (Login/Logout)
     # This provides: /accounts/login/ and /accounts/logout/
     path('accounts/', include('django.contrib.auth.urls')), 
+   
 
     # 3. Core Navigation
     path('dashboard/', views.dashboard_view, name='dashboard'),

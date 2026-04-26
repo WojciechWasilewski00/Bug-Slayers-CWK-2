@@ -116,16 +116,13 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# This tells Django where to look for your global static folder
-
+# This tells Django where to look for your global static folder for the logo 
+STATICFILES_DIRS = [
+    BASE_DIR / 'BugSlayersCWK2' / 'static',
+]
 
 # Where to go after logging in
 LOGIN_REDIRECT_URL = 'dashboard'
@@ -134,3 +131,4 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 LOGOUT_ON_GET = True
+

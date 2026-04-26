@@ -153,51 +153,51 @@
       .mt-auto {
         margin-top: auto;
       }
+
+      .brand-logo {
+        height: 40px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+      }
+      
     </style>
   </head>
   <body>
-    <div class="sidebar">
-      <a href="{% url 'dashboard' %}" class="sidebar-brand">
-        <img
-          src="{% static 'logo.png' %}"
-          alt=""
-          class="brand-logo"
-          onerror="
-            this.style.display = 'none';
-            document.getElementById('fallback').style.display = 'block';
-          "
-        />
-        <div id="fallback" class="brand-fallback" style="display: none">
-          <span style="color: var(--accent-color)">BUG</span>SLAYERS
+        <div class="sidebar">
+          <a href="{% url 'dashboard' %}" class="sidebar-brand">
+            <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
+          </a>
+        <div class="sidebar">
+          <div class="sidebar-brand">
+            <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
+          </div>
+      
+          <div class="flex-grow-1">
+            <a href="{% url 'dashboard' %}">
+              <span class="icon-wrapper">🏠</span> Dashboard
+            </a>
+      
+            <a href="{% url 'team_page' %}">
+              <span class="icon-wrapper">👥</span> Teams
+            </a>
+            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+      
+            <a href="{% url 'weekly_schedule' %}">
+              <span class="icon-wrapper">📅</span> Schedule
+            </a>
+            <a href="{% url 'inbox' %}">
+              <span class="icon-wrapper">📩</span> Messages
+            </a>
+      
+          </div>
+      
+        
+            <a href="#">
+              <span class="icon-wrapper">⚙️</span> Settings
+            </a>
+          </div>
         </div>
-      </a>
-
-      <div class="flex-grow-1">
-        <div class="nav-section-title">Home</div>
-        <a href="{% url 'dashboard' %}"
-          ><span class="icon-wrapper">🏠</span> Dashboard</a
-        >
-        <div class="nav-section-title">Schedule</div>
-        <a href="{% url 'weekly_schedule' %}"
-          ><span class="icon-wrapper">📅</span> Weekly Schedule</a
-        >
-        <div class="nav-section-title">Team Workspace</div>
-        <a href="{% url 'team_page' %}" class="active"
-          ><span class="icon-wrapper">👥</span> Teams</a
-        >
-        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-        <a href="{% url 'inbox' %}"
-          ><span class="icon-wrapper">📩</span> Messages</a
-        >
-      </div>
-
-      <div class="mt-auto border-top pt-3 pb-4">
-        <div class="nav-section-title">Administration</div>
-        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-        <a href="/admin/" target="_blank"
-          ><span class="icon-wrapper">🛡️</span> Admin Panel</a
-        >
-      </div>
     </div>
 
     <div class="main-wrapper">
