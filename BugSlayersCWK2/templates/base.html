@@ -152,21 +152,19 @@
         <a href="#">Contact</a>
       </div>
 
-      <div>
+      <div class="topbar-right">
         {% if user.is_authenticated %}
-          Hello, <b>{{ user.username }}</b>
-
+          <span>Hello, <strong>{{ user.username }}</strong></span>
           <form action="{% url 'logout' %}" method="post" style="display:inline;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-              Logout
-            </button>
+            <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
           </form>
         {% else %}
           <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
         {% endif %}
       </div>
     </div>
+
 
     <div class="content-padding">
       {% block content %}{% endblock %}
