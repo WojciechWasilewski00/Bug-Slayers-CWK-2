@@ -119,10 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-# Guys pleas do not change this this is for the logo.
-STATICFILES_DIRS = [
-    BASE_DIR / 'BugSlayersCWK2' / 'static',
-]
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
