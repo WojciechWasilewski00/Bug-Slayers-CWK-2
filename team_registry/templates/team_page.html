@@ -49,9 +49,10 @@
       }
       .brand-logo {
         max-width: 180px;
-        max-height: 50px;
+        max-height: 70px;
         width: auto;
         height: auto;
+        display: block;
         object-fit: contain;
       }
       .brand-fallback {
@@ -154,19 +155,13 @@
         margin-top: auto;
       }
 
-      .brand-logo {
-        height: 40px;
-        width: auto;
-        display: block;
-        object-fit: contain;
-      }
-      
+
     </style>
   </head>
   <body>
     <div class="sidebar">
-      <div class="sidebar-brand">
-        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
+      <div class="brand-logo">
+        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo">
       </div>
       
           <div class="flex-grow-1">
