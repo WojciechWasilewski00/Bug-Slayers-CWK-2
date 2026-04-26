@@ -28,7 +28,7 @@
         font-family: "Plus Jakarta Sans", sans-serif;
       }
 
-      /* Sidebar - Standardized */
+      /* --- Standardized Sidebar --- */
       .sidebar {
         width: 270px;
         background-color: var(--sidebar-bg);
@@ -55,13 +55,6 @@
         display: block;
         object-fit: contain;
       }
-      .brand-fallback {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #2a3547;
-        letter-spacing: -0.5px;
-      }
-
       .nav-section-title {
         font-size: 0.7rem;
         font-weight: 700;
@@ -95,7 +88,7 @@
         font-size: 1.1rem;
       }
 
-      /* Main Wrapper & Top Nav - Standardized */
+      /* --- Main Content Wrapper --- */
       .main-wrapper {
         margin-left: 270px;
         flex-grow: 1;
@@ -103,6 +96,8 @@
         display: flex;
         flex-direction: column;
       }
+
+      /* --- Standardized Top Nav --- */
       .top-nav-bar {
         background: #ffffff;
         padding: 15px 40px;
@@ -122,6 +117,7 @@
         margin-right: 25px;
       }
 
+      /* --- Page Specific Styles --- */
       .main-content {
         padding: 40px;
       }
@@ -151,44 +147,37 @@
         border-radius: 6px;
         text-decoration: none;
       }
-      .mt-auto {
-        margin-top: auto;
-      }
-
-
     </style>
   </head>
   <body>
     <div class="sidebar">
-      <div class="brand-logo">
-        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo">
+      <a href="{% url 'dashboard' %}" class="sidebar-brand">
+        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
+      </a>
+
+      <div class="flex-grow-1">
+        <a href="{% url 'dashboard' %}">
+          <span class="icon-wrapper">🏠</span> Dashboard
+        </a>
+        <a href="{% url 'team_page' %}" class="active">
+          <span class="icon-wrapper">👥</span> Teams
+        </a>
+        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+        <a href="{% url 'weekly_schedule' %}">
+          <span class="icon-wrapper">📅</span> Schedule
+        </a>
+        <a href="{% url 'inbox' %}">
+          <span class="icon-wrapper">📩</span> Messages
+        </a>
       </div>
-      
-          <div class="flex-grow-1">
-            <a href="{% url 'dashboard' %}">
-              <span class="icon-wrapper">🏠</span> Dashboard
-            </a>
-      
-            <a href="{% url 'team_page' %}">
-              <span class="icon-wrapper">👥</span> Teams
-            </a>
-            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-      
-            <a href="{% url 'weekly_schedule' %}">
-              <span class="icon-wrapper">📅</span> Schedule
-            </a>
-            <a href="{% url 'inbox' %}">
-              <span class="icon-wrapper">📩</span> Messages
-            </a>
-      
-          </div>
-      
-        
-            <a href="#">
-              <span class="icon-wrapper">⚙️</span> Settings
-            </a>
-          </div>
-        </div>
+
+      <div class="mt-auto border-top pt-2 pb-3">
+        <div class="nav-section-title">Administration</div>
+        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+        <a href="/admin/" target="_blank">
+          <span class="icon-wrapper">🛡️</span> Admin Panel
+        </a>
+      </div>
     </div>
 
     <div class="main-wrapper">
@@ -202,13 +191,19 @@
 
         <div class="topbar-right">
           {% if user.is_authenticated %}
-            <span>Hello, <strong>{{ user.username }}</strong></span>
-            <form action="{% url 'logout' %}" method="post" style="display:inline;">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
-            </form>
+          <span class="me-3">Hello, <strong>{{ user.username }}</strong></span>
+          <form
+            action="{% url 'logout' %}"
+            method="post"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              Logout
+            </button>
+          </form>
           {% else %}
-            <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
+          <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
           {% endif %}
         </div>
       </nav>

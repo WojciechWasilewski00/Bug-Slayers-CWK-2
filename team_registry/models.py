@@ -20,10 +20,10 @@ class Team(models.Model):
     dept_head_name = models.CharField(max_length=255, blank=True, null=True)
     team_lead_name = models.CharField(max_length=255, blank=True, null=True)
     manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='managed_teams')
-    dependencies = models.TextField(blank=True)   
-    dependency_type = models.CharField(max_length=255, blank=True, null=True), 
+    dependencies = models.TextField(blank=True) 
+    dependency_type = models.CharField(max_length=100, blank=True, null=True)
     skills = models.ManyToManyField('Skill', blank=True)
-    jira_board_link = models.URLField(max_length=500, blank=True, null=True),
+    jira_board_link = models.URLField(max_length=500, blank=True, null=True)
     depends_on = models.ManyToManyField(
         'self', 
         through='TeamDependency', 
