@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'team_registry', # Wojciech's app
     'scheduling',  # Jayne's app
     'messagesapp', # Mariam' s app
+    'reports', #Heidi's app
 ]
 
 MIDDLEWARE = [

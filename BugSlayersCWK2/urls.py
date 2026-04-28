@@ -37,5 +37,6 @@ urlpatterns = [
     # 5. Features
     path('schedule/', include('scheduling.urls')),
     path('messages/', include('messagesapp.urls')),
+    path('reports/', include('reports.urls')),
     # Felipe put you map here
 ]
