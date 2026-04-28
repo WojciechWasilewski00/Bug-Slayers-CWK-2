@@ -65,7 +65,6 @@ def sent(request):
         message_status='sent',
         sender=request.user
     )
-
     return render(request, 'messagesapp/sent.html', {
         'success_message': success_message,
         'messages': sent_messages

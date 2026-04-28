@@ -25,6 +25,8 @@ when a message is successfully sent.
 <!-- Loop through all sent messages passed from the backend -->
 
     <div class="message-card">
+        <p><strong>From:</strong>{{msg.sender.username}}</p>
+        <p><strong>Email:</strong>{{msg.sender.email}}</p>
         <!-- Container for each individual sent message -->
         <h3>{{ msg.message_subject }}</h3>
         <!-- Displays the subject of the message -->

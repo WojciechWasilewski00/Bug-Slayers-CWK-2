@@ -7,7 +7,7 @@ from django import forms
 from .models import Message
 # Import the Message model to link the form to the database
 from team_registry.models import Team
-# Import Team model so we can display team options in the form
+# Import Team model so we can display team options in the form 
 
 
 class MessageForm(forms.ModelForm):
