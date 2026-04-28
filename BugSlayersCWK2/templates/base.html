@@ -24,6 +24,7 @@
       margin: 0;
       font-family: "Plus Jakarta Sans", sans-serif;
       color: #2a3547;
+      display: flex;
     }
 
     .sidebar {
@@ -44,12 +45,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .sidebar-logo {
-      max-width: 180px;
-      height: auto;
-      display: block;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -1px;
     }
 
     .sidebar a {
@@ -61,6 +59,7 @@
       text-decoration: none;
       border-radius: 7px;
       font-weight: 500;
+      transition: all 0.3s ease;
     }
 
     .sidebar a:hover,
@@ -75,8 +74,20 @@
       font-size: 1.1rem;
     }
 
+    .nav-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #2a3547;
+      text-transform: uppercase;
+      padding: 10px 25px;
+      margin-top: 15px;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
     .main-content {
       margin-left: 270px;
+      width: calc(100% - 270px);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -111,95 +122,48 @@
   </style>
 </head>
 
-<<<<<<< HEAD
 <body>
   <div class="sidebar">
     <div class="sidebar-brand">
-      <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
-=======
-      .mt-auto {
-        margin-top: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="sidebar-brand">
-        <span style="color: var(--accent-color)">BUG</span>SLAYERS
-      </div>
-
-      <div class="flex-grow-1">
-        <div class="nav-section-title">Home</div>
-        <a
-          href="{% url 'dashboard' %}"
-          class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
-        >
-          <span class="icon-wrapper">🏠</span> Dashboard
-        </a>
-
-        <div class="nav-section-title">Schedule</div>
-        <a
-          href="{% url 'weekly_schedule' %}"
-          class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}"
-        >
-          <span class="icon-wrapper">📅</span> Schedule
-        </a>
-
-        <div class="nav-section-title">Team Workspace</div>
-        <a
-          href="{% url 'team_page' %}"
-          class="{% if 'teams' in request.path %}active{% endif %}"
-        >
-          <span class="icon-wrapper">👥</span> Teams
-        </a>
-        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-
-        <a href="{% url 'inbox' %}"
-          ><span class="icon-wrapper">📩</span> Messages</a
-        >
-        <a href="/reports/" class="nav-link">📊 Reports</a>
-      </div>
-
-      <div class="mt-auto border-top pt-3 pb-4">
-        <div class="nav-section-title">Administration</div>
-        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-        <a href="/admin/" target="_blank"
-          ><span class="icon-wrapper">🛡️</span> Admin Panel</a
-        >
-      </div>
->>>>>>> feaeff5 (Added reports feature)
+      <span style="color: var(--accent-color)">BUG</span>SLAYERS
     </div>
 
     <div class="flex-grow-1">
-      <a href="{% url 'dashboard' %}">
+      <div class="nav-section-title">Home</div>
+      <a href="{% url 'scheduling:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
         <span class="icon-wrapper">🏠</span> Dashboard
       </a>
 
-      <a href="{% url 'team_page' %}">
-        <span class="icon-wrapper">👥</span> Teams
-      </a>
-      <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-
-      <a href="{% url 'weekly_schedule' %}">
+      <div class="nav-section-title">Schedule</div>
+      <a href="{% url 'scheduling:weekly_schedule' %}" class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}">
         <span class="icon-wrapper">📅</span> Schedule
       </a>
+
+      <div class="nav-section-title">Team Workspace</div>
+      <a href="{% url 'team_page' %}" class="{% if 'teams' in request.path %}active{% endif %}">
+        <span class="icon-wrapper">👥</span> Teams
+      </a>
+      
+      <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+
       <a href="{% url 'inbox' %}">
         <span class="icon-wrapper">📩</span> Messages
       </a>
-
+      
+      <a href="/reports/"><span class="icon-wrapper">📊</span> Reports</a>
     </div>
 
-  
-      <a href="#">
-        <span class="icon-wrapper">⚙️</span> Settings
-      </a>
+    <div class="mt-auto border-top pt-3 pb-4">
+      <div class="nav-section-title">Administration</div>
+      <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+      <a href="/admin/" target="_blank"><span class="icon-wrapper">🛡️</span> Admin Panel</a>
     </div>
   </div>
 
   <div class="main-content">
     <div class="top-nav-bar">
       <div class="top-nav-links">
-        <a href="{% url 'dashboard' %}">Home</a>
+        <a href="{% url 'scheduling:dashboard' %}">Home</a>
         <a href="#">Service</a>
         <a href="#">Portfolio</a>
         <a href="#">Contact</a>
@@ -208,7 +172,7 @@
       <div class="topbar-right">
         {% if user.is_authenticated %}
           <span>Hello, <strong>{{ user.username }}</strong></span>
-          <form action="{% url 'logout' %}" method="post" style="display:inline;">
+          <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 10px;">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
           </form>
