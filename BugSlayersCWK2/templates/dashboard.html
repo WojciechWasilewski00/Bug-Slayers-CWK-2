@@ -27,22 +27,7 @@
     </style>
   </head>
   <body>
-    <div class="sidebar">
-      <a href="{% url 'dashboard' %}" class="sidebar-brand">
-        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
-      </a>
-      <div class="flex-grow-1">
-        <a href="{% url 'dashboard' %}" class="active"><span class="icon-wrapper">🏠</span> Dashboard</a>
-        <a href="{% url 'team_page' %}"><span class="icon-wrapper">👥</span> Teams</a>
-        <a href="{% url 'organisation' %}"><span class="icon-wrapper">🏢</span> Organisation</a>
-        <a href="{% url 'scheduling:weekly_schedule' %}"><span class="icon-wrapper">📅</span> Schedule</a>
-        <a href="{% url 'inbox' %}"><span class="icon-wrapper">📩</span> Messages</a>
-      </div>
-      <div class="mt-auto border-top pt-2 pb-3">
-        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-
-      </div>
-    </div>
+    {% include 'navbar.html' %}
     <div class="main-wrapper">
       <nav class="top-nav-bar">
         <div class="top-nav-links">
