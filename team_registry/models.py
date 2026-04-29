@@ -30,6 +30,9 @@ class Team(models.Model):
         symmetrical=False, 
         related_name='required_by'
     )
+    
+    def __str__(self):
+        return self.team_name
 
 class TeamDependency(models.Model):
     TYPES = (
@@ -40,6 +43,4 @@ class TeamDependency(models.Model):
     to_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='dependency_target')
     dependency_type = models.CharField(max_length=20, choices=TYPES, default='upstream')
 
-    def __str__(self):
-        return self.team_name
     

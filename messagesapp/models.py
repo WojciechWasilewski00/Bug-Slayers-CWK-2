@@ -28,3 +28,4 @@ class Message(models.Model):
     def __str__(self):
         # Defines how the message is displayed in the admin panel
         return self.message_subject
+    
