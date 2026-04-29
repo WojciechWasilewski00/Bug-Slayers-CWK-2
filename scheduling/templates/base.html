@@ -117,6 +117,7 @@
   </head>
   <body>
     <div class="sidebar">
+<<<<<<< HEAD
       <div class="sidebar-brand">
         <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
       </div>
@@ -146,6 +147,35 @@
         </a>
       </div>
   
+=======
+      <div class="brand"><span>BUG</span>SLAYERS</div>
+
+      <nav class="nav-list">
+        <div class="nav-section-title">Home</div>
+        <div class="nav-item">
+          <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
+        </div>
+
+        <div class="nav-section-title">Team Management</div>
+        <div class="nav-item">
+          <a href="{% url 'team_page' %}" class="nav-link">👥 Teams</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
+        </div>
+
+        <div class="nav-section-title">Apps</div>
+        <div class="nav-item">
+          <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
+        </div>
+
+        <div class="nav-item">
+         <a href="/reports/" class="nav-link">📊 Reports</a>
+        </div>
+>>>>>>> feaeff5 (Added reports feature)
       </nav>
 
       <div class="logout-form">

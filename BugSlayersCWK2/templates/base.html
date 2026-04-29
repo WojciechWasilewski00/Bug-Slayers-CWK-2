@@ -111,10 +111,63 @@
   </style>
 </head>
 
+<<<<<<< HEAD
 <body>
   <div class="sidebar">
     <div class="sidebar-brand">
       <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
+=======
+      .mt-auto {
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-brand">
+        <span style="color: var(--accent-color)">BUG</span>SLAYERS
+      </div>
+
+      <div class="flex-grow-1">
+        <div class="nav-section-title">Home</div>
+        <a
+          href="{% url 'dashboard' %}"
+          class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+        >
+          <span class="icon-wrapper">🏠</span> Dashboard
+        </a>
+
+        <div class="nav-section-title">Schedule</div>
+        <a
+          href="{% url 'weekly_schedule' %}"
+          class="{% if request.resolver_match.url_name == 'weekly_schedule' %}active{% endif %}"
+        >
+          <span class="icon-wrapper">📅</span> Schedule
+        </a>
+
+        <div class="nav-section-title">Team Workspace</div>
+        <a
+          href="{% url 'team_page' %}"
+          class="{% if 'teams' in request.path %}active{% endif %}"
+        >
+          <span class="icon-wrapper">👥</span> Teams
+        </a>
+        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+
+        <a href="{% url 'inbox' %}"
+          ><span class="icon-wrapper">📩</span> Messages</a
+        >
+        <a href="/reports/" class="nav-link">📊 Reports</a>
+      </div>
+
+      <div class="mt-auto border-top pt-3 pb-4">
+        <div class="nav-section-title">Administration</div>
+        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+        <a href="/admin/" target="_blank"
+          ><span class="icon-wrapper">🛡️</span> Admin Panel</a
+        >
+      </div>
+>>>>>>> feaeff5 (Added reports feature)
     </div>
 
     <div class="flex-grow-1">
