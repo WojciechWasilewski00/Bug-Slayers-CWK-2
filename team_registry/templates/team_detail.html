@@ -5,221 +5,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ team.team_name }} | Bug Slayers</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        --sidebar-bg: #ffffff;
-        --sidebar-text: #5a6a85;
-        --accent-color: #5d87ff;
-        --body-bg: #f4f7f6;
-      }
-      body {
-        background-color: var(--body-bg);
-        display: flex;
-        min-height: 100vh;
-        margin: 0;
-        font-family: "Plus Jakarta Sans", sans-serif;
-      }
-
-      /* --- Standardized Sidebar --- */
-      .sidebar {
-        width: 270px;
-        background-color: var(--sidebar-bg);
-        position: fixed;
-        height: 100vh;
-        border-right: 1px solid #eef2f6;
-        display: flex;
-        flex-direction: column;
-        z-index: 1050;
-      }
-      .sidebar-brand {
-        padding: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100px;
-        text-decoration: none;
-      }
-      .brand-logo {
-        max-width: 180px;
-        max-height: 70px;
-        width: auto;
-        height: auto;
-        display: block;
-        object-fit: contain;
-      }
-      .sidebar a {
-        padding: 12px 20px;
-        margin: 2px 15px;
-        display: flex;
-        align-items: center;
-        color: var(--sidebar-text);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.95rem;
-        border-radius: 7px;
-        transition: all 0.2s;
-      }
-      .sidebar a:hover,
-      .sidebar a.active {
-        background-color: #ecf2ff;
-        color: var(--accent-color);
-        font-weight: 600;
-      }
-      .icon-wrapper {
-        width: 30px;
-        font-size: 1.1rem;
-      }
-      .nav-section-title {
-        font-size: 0.7rem;
-        font-weight: 700;
-        color: #2a3547;
-        text-transform: uppercase;
-        padding: 10px 25px;
-        margin-top: 15px;
-        letter-spacing: 1px;
-        opacity: 0.8;
-      }
-
-      /* --- Main Content Wrapper --- */
-      .main-wrapper {
-        margin-left: 270px;
-        flex-grow: 1;
-        width: calc(100% - 270px);
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* --- Standardized Top Nav --- */
-      .top-nav-bar {
-        background: #ffffff;
-        padding: 15px 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #eef2f6;
-        position: sticky;
-        top: 0;
-        z-index: 998;
-      }
-      .top-nav-links a {
-        text-decoration: none;
-        color: var(--sidebar-text);
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-right: 25px;
-      }
-
-      /* --- Detail Page Content --- */
-      .main-content {
-        padding: 40px;
-      }
-      .custom-card {
-        background: white;
-        border-radius: 15px;
-        padding: 40px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      }
-      .nav-tabs .nav-link {
-        border: none;
-        color: #5a6a85;
-        font-weight: 700;
-        padding: 12px 20px;
-      }
-      .nav-tabs .nav-link.active {
-        color: var(--accent-color);
-        border-bottom: 3px solid var(--accent-color);
-        background: none;
-      }
-
-      /* Overview/Info Cards */
-      .info-item-card {
-        display: flex;
-        align-items: center;
-        background: #ffffff;
-        border: 1px solid #e3e6f0;
-        border-radius: 12px;
-        padding: 20px;
-        transition: transform 0.2s;
-      }
-      .info-icon {
-        font-size: 1.8rem;
-        margin-right: 15px;
-        background: #f8f9fc;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-      }
-      .info-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: #858796;
-        font-weight: 800;
-        display: block;
-      }
-      .info-value {
-        font-size: 1rem;
-        color: #2e2f37;
-        font-weight: 600;
-      }
-
-      /* Dependencies Table */
-      .dep-table {
-        width: 100%;
-        vertical-align: middle;
-      }
-      .dep-table th {
-        background: #f8f9fa;
-        color: #6c757d;
-        font-size: 0.75rem;
-        padding: 12px;
-      }
-      .dep-table td {
-        padding: 15px;
-        border-bottom: 1px solid #f1f1f1;
-      }
-
-      /* Avatar Circles */
-      .avatar-circle {
-        width: 45px;
-        height: 45px;
-        background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        margin-right: 15px;
-      }
-
-      .btn-header-action {
-        font-weight: 700;
-        font-size: 0.85rem;
-        padding: 10px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-      }
-      .skill-tag {
-        background: #ecf2ff;
-        color: var(--accent-color);
-        border: 1px solid #d1e1ff;
-        padding: 6px 14px;
-        border-radius: 6px;
-        font-weight: 600;
-        display: inline-block;
-        margin: 0 8px 8px 0;
-      }
+      :root { --sidebar-bg: #ffffff; --sidebar-text: #5a6a85; --accent-color: #5d87ff; --body-bg: #f4f7f6; }
+      body { background-color: var(--body-bg); display: flex; min-height: 100vh; margin: 0; font-family: "Plus Jakarta Sans", sans-serif; }
+      .sidebar { width: 270px; background-color: var(--sidebar-bg); position: fixed; height: 100vh; border-right: 1px solid #eef2f6; display: flex; flex-direction: column; z-index: 1050; }
+      .sidebar-brand { padding: 25px; display: flex; justify-content: center; align-items: center; min-height: 100px; text-decoration: none; }
+      .brand-logo { max-width: 180px; max-height: 70px; width: auto; height: auto; display: block; object-fit: contain; }
+      .sidebar a { padding: 12px 20px; margin: 2px 15px; display: flex; align-items: center; color: var(--sidebar-text); text-decoration: none; font-weight: 500; font-size: 0.95rem; border-radius: 7px; transition: all 0.2s; }
+      .sidebar a:hover, .sidebar a.active { background-color: #ecf2ff; color: var(--accent-color); font-weight: 600; }
+      .icon-wrapper { width: 30px; font-size: 1.1rem; }
+      .nav-section-title { font-size: 0.7rem; font-weight: 700; color: #2a3547; text-transform: uppercase; padding: 10px 25px; margin-top: 15px; letter-spacing: 1px; opacity: 0.8; }
+      .main-wrapper { margin-left: 270px; flex-grow: 1; width: calc(100% - 270px); display: flex; flex-direction: column; }
+      .top-nav-bar { background: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eef2f6; position: sticky; top: 0; z-index: 998; }
+      .top-nav-links a { text-decoration: none; color: var(--sidebar-text); font-weight: 600; font-size: 0.9rem; margin-right: 25px; }
+      .main-content { padding: 40px; }
+      .custom-card { background: white; border-radius: 15px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+      .nav-tabs .nav-link { border: none; color: #5a6a85; font-weight: 700; padding: 12px 20px; }
+      .nav-tabs .nav-link.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); background: none; }
+      .info-item-card { display: flex; align-items: center; background: #ffffff; border: 1px solid #e3e6f0; border-radius: 12px; padding: 20px; transition: transform 0.2s; }
+      .info-icon { font-size: 1.8rem; margin-right: 15px; background: #f8f9fc; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+      .info-label { font-size: 0.75rem; text-transform: uppercase; color: #858796; font-weight: 800; display: block; }
+      .info-value { font-size: 1rem; color: #2e2f37; font-weight: 600; }
+      .dep-table { width: 100%; vertical-align: middle; }
+      .dep-table th { background: #f8f9fa; color: #6c757d; font-size: 0.75rem; padding: 12px; }
+      .dep-table td { padding: 15px; border-bottom: 1px solid #f1f1f1; }
+      .avatar-circle { width: 45px; height: 45px; background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; }
+      .btn-header-action { font-weight: 700; font-size: 0.85rem; padding: 10px 18px; border-radius: 8px; text-decoration: none; }
+      .skill-tag { background: #ecf2ff; color: var(--accent-color); border: 1px solid #d1e1ff; padding: 6px 14px; border-radius: 6px; font-weight: 600; display: inline-block; margin: 0 8px 8px 0; }
     </style>
   </head>
   <body>
@@ -227,29 +41,18 @@
       <a href="{% url 'dashboard' %}" class="sidebar-brand">
         <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
       </a>
-
       <div class="flex-grow-1">
-        <a href="{% url 'dashboard' %}"
-          ><span class="icon-wrapper">🏠</span> Dashboard</a
-        >
-        <a href="{% url 'team_page' %}" class="active"
-          ><span class="icon-wrapper">👥</span> Teams</a
-        >
+        <a href="{% url 'dashboard' %}"><span class="icon-wrapper">🏠</span> Dashboard</a>
+        <a href="{% url 'team_page' %}" class="active"><span class="icon-wrapper">👥</span> Teams</a>
+        <a href="{% url 'organisation' %}"><span class="icon-wrapper">🏢</span> Organisation</a>
         <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-        <a href="{% url 'weekly_schedule' %}"
-          ><span class="icon-wrapper">📅</span> Schedule</a
-        >
-        <a href="{% url 'inbox' %}"
-          ><span class="icon-wrapper">📩</span> Messages</a
-        >
+        <a href="{% url 'scheduling:weekly_schedule' %}"><span class="icon-wrapper">📅</span> Schedule</a>
+        <a href="{% url 'inbox' %}"><span class="icon-wrapper">📩</span> Messages</a>
       </div>
-
       <div class="mt-auto border-top pt-2 pb-3">
         <div class="nav-section-title">Administration</div>
         <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-        <a href="/admin/" target="_blank"
-          ><span class="icon-wrapper">🛡️</span> Admin Panel</a
-        >
+        <a href="/admin/" target="_blank"><span class="icon-wrapper">🛡️</span> Admin Panel</a>
       </div>
     </div>
 
@@ -261,19 +64,12 @@
           <a href="#">Portfolio</a>
           <a href="#">Contact</a>
         </div>
-
         <div class="topbar-right">
           {% if user.is_authenticated %}
           <span class="me-3">Hello, <strong>{{ user.username }}</strong></span>
-          <form
-            action="{% url 'logout' %}"
-            method="post"
-            style="display: inline"
-          >
+          <form action="{% url 'logout' %}" method="post" style="display:inline">
             {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-              Logout
-            </button>
+            <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
           </form>
           {% else %}
           <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
@@ -283,122 +79,54 @@
 
       <div class="main-content">
         <div class="mb-4">
-          <a
-            href="{% url 'team_page' %}"
-            class="text-decoration-none text-muted fw-bold small"
-            >← BACK TO REGISTRY</a
-          >
+          <a href="{% url 'team_page' %}" class="text-decoration-none text-muted fw-bold small">← BACK TO REGISTRY</a>
         </div>
 
         <div class="custom-card">
           <div class="d-flex justify-content-between align-items-start mb-4">
             <div>
               <h1 class="fw-bold text-dark mb-1">{{ team.team_name }}</h1>
-              <span class="badge bg-light text-primary fs-6"
-                >{{ team.department }}</span
-              >
+              <span class="badge bg-light text-primary fs-6">{{ team.department }}</span>
             </div>
             <div class="d-flex gap-2">
-              <a
-                href="{% url 'weekly_schedule' %}?team={{ team.team_name }}"
-                class="btn btn-light border btn-header-action"
-                >📅 Schedule Meeting</a
-              >
-              <a
-                href="{% url 'inbox' %}"
-                class="btn btn-primary btn-header-action"
-                >📩 Contact Team</a
-              >
+              <a href="{% url 'scheduling:weekly_schedule' %}?team={{ team.team_name }}" class="btn btn-light border btn-header-action">📅 Schedule Meeting</a>
+              <a href="{% url 'inbox' %}" class="btn btn-primary btn-header-action">📩 Contact Team</a>
             </div>
           </div>
 
           <ul class="nav nav-tabs mb-4" id="detailTabs" role="tablist">
-            <li class="nav-item">
-              <button
-                class="nav-link active"
-                data-bs-toggle="tab"
-                data-bs-target="#overview"
-                type="button"
-              >
-                Overview
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                data-bs-toggle="tab"
-                data-bs-target="#skills"
-                type="button"
-              >
-                Skills
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                data-bs-toggle="tab"
-                data-bs-target="#personnel"
-                type="button"
-              >
-                Members
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                data-bs-toggle="tab"
-                data-bs-target="#dependencies"
-                type="button"
-              >
-                Dependencies
-              </button>
-            </li>
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview" type="button">Overview</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#skills" type="button">Skills</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#personnel" type="button">Members</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dependencies" type="button">Dependencies</button></li>
           </ul>
 
           <div class="tab-content">
             <div class="tab-pane fade show active" id="overview">
               <div class="mb-4 p-4 bg-light rounded-3">
                 <h5 class="fw-bold text-primary mb-3">About the Team</h5>
-                <p class="text-muted mb-0">
-                  {{ team.team_description|default:"No description provided." }}
-                </p>
+                <p class="text-muted mb-0">{{ team.team_description|default:"No description provided." }}</p>
               </div>
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="info-item-card">
                     <div class="info-icon">👤</div>
-                    <div>
-                      <span class="info-label">Team Leader</span
-                      ><span class="info-value"
-                        >{{ team.team_lead_name|default:"TBD" }}</span
-                      >
-                    </div>
+                    <div><span class="info-label">Team Leader</span><span class="info-value">{{ team.team_lead_name|default:"TBD" }}</span></div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="info-item-card">
                     <div class="info-icon">👔</div>
-                    <div>
-                      <span class="info-label">Dept Head</span
-                      ><span class="info-value"
-                        >{{ team.dept_head_name|default:"TBD" }}</span
-                      >
-                    </div>
+                    <div><span class="info-label">Dept Head</span><span class="info-value">{{ team.dept_head_name|default:"TBD" }}</span></div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="info-item-card">
                     <div class="info-icon">🚀</div>
                     <div>
-                      <span class="info-label">Jira Project</span
-                      ><span class="info-value">
-                        {% if team.jira_board_link %}
-                        <a href="{{ team.jira_board_link }}" target="_blank"
-                          >{{ team.jira_project_name|default:"View Board" }}
-                          ↗</a
-                        >
-                        {% else %} {{ team.jira_project_name|default:"Not
-                        Linked" }} {% endif %}
+                      <span class="info-label">Jira Project</span>
+                      <span class="info-value">
+                        {% if team.jira_board_link %}<a href="{{ team.jira_board_link }}" target="_blank">View Board ↗</a>{% else %}Not Linked{% endif %}
                       </span>
                     </div>
                   </div>
@@ -409,10 +137,8 @@
             <div class="tab-pane fade" id="skills">
               <h5 class="fw-bold mb-3">Technical Proficiency</h5>
               <div class="skill-tags">
-                {% for skill in skills %}
-                <span class="skill-tag">🔵 {{ skill.name }}</span>
-                {% empty %}
-                <p class="text-muted">No skills assigned to this team.</p>
+                {% for skill in skills %}<span class="skill-tag">🔵 {{ skill.name }}</span>
+                {% empty %}<p class="text-muted">No skills assigned to this team.</p>
                 {% endfor %}
               </div>
             </div>
@@ -422,25 +148,16 @@
                 {% if team.dept_head_name %}
                 <div class="col-md-6">
                   <div class="info-item-card">
-                    <div class="avatar-circle">
-                      {{ team.dept_head_name|slice:":1" }}
-                    </div>
-                    <div>
-                      <h6 class="mb-0 fw-bold">{{ team.dept_head_name }}</h6>
-                      <small class="text-muted">Department Head</small>
-                    </div>
+                    <div class="avatar-circle">{{ team.dept_head_name|slice:":1" }}</div>
+                    <div><h6 class="mb-0 fw-bold">{{ team.dept_head_name }}</h6><small class="text-muted">Department Head</small></div>
                   </div>
                 </div>
-                {% endif %} {% if team.team_lead_name %}
+                {% endif %}
+                {% if team.team_lead_name %}
                 <div class="col-md-6">
                   <div class="info-item-card">
-                    <div class="avatar-circle">
-                      {{ team.team_lead_name|slice:":1" }}
-                    </div>
-                    <div>
-                      <h6 class="mb-0 fw-bold">{{ team.team_lead_name }}</h6>
-                      <small class="text-muted">Team Leader</small>
-                    </div>
+                    <div class="avatar-circle">{{ team.team_lead_name|slice:":1" }}</div>
+                    <div><h6 class="mb-0 fw-bold">{{ team.team_lead_name }}</h6><small class="text-muted">Team Leader</small></div>
                   </div>
                 </div>
                 {% endif %}
@@ -451,38 +168,18 @@
               <div class="table-responsive rounded-3 border">
                 <table class="table dep-table mb-0">
                   <thead>
-                    <tr>
-                      <th>TEAM NAME</th>
-                      <th>TYPE</th>
-                      <th>LEAD</th>
-                      <th class="text-end">ACTION</th>
-                    </tr>
+                    <tr><th>TEAM NAME</th><th>TYPE</th><th>LEAD</th><th class="text-end">ACTION</th></tr>
                   </thead>
                   <tbody>
                     {% for dep in dependencies %}
                     <tr>
                       <td class="fw-bold">🤝 {{ dep.to_team.team_name }}</td>
-                      <td>
-                        <span
-                          class="badge {% if dep.dependency_type == 'upstream' %}bg-info{% else %}bg-warning{% endif %}"
-                          >{{ dep.dependency_type|upper }}</span
-                        >
-                      </td>
+                      <td><span class="badge {% if dep.dependency_type == 'upstream' %}bg-info{% else %}bg-warning{% endif %}">{{ dep.dependency_type|upper }}</span></td>
                       <td>{{ dep.to_team.team_lead_name|default:"N/A" }}</td>
-                      <td class="text-end">
-                        <a
-                          href="{% url 'team_detail' dep.to_team.id %}"
-                          class="btn btn-sm btn-outline-primary"
-                          >View</a
-                        >
-                      </td>
+                      <td class="text-end"><a href="{% url 'team_detail' dep.to_team.id %}" class="btn btn-sm btn-outline-primary">View</a></td>
                     </tr>
                     {% empty %}
-                    <tr>
-                      <td colspan="4" class="text-center py-4 text-muted">
-                        No dependencies found.
-                      </td>
-                    </tr>
+                    <tr><td colspan="4" class="text-center py-4 text-muted">No dependencies found.</td></tr>
                     {% endfor %}
                   </tbody>
                 </table>
@@ -490,8 +187,75 @@
             </div>
           </div>
         </div>
+
+        <!-- Dependency Network Graph -->
+        <div class="custom-card mt-4">
+          <h5 class="fw-bold text-dark mb-2">🔗 Dependency Network</h5>
+          <p class="text-muted small mb-3">Click a node to navigate to that team.</p>
+          <div id="dep-graph" style="width:100%; height:400px; background:#f8faff; border-radius:12px; border:1px solid #eef2f6;"></div>
+        </div>
+
       </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script>
+      const rawData = {{ graph_data|safe }};
+      const width = document.getElementById('dep-graph').clientWidth;
+      const height = 400;
+
+      const svg = d3.select('#dep-graph').append('svg').attr('width', width).attr('height', height);
+
+      svg.append('defs').append('marker')
+        .attr('id', 'arrow').attr('viewBox', '0 -5 10 10').attr('refX', 28)
+        .attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto')
+        .append('path').attr('d', 'M0,-5L10,0L0,5').attr('fill', '#5d87ff');
+
+      const simulation = d3.forceSimulation(rawData.nodes)
+        .force('link', d3.forceLink(rawData.links).id(d => d.id).distance(150))
+        .force('charge', d3.forceManyBody().strength(-400))
+        .force('center', d3.forceCenter(width / 2, height / 2));
+
+      const link = svg.append('g').selectAll('line').data(rawData.links).join('line')
+        .attr('stroke', '#5d87ff').attr('stroke-width', 2).attr('marker-end', 'url(#arrow)');
+
+      const node = svg.append('g').selectAll('g').data(rawData.nodes).join('g')
+        .style('cursor', 'pointer')
+        .on('click', (event, d) => { window.location.href = `/teams/${d.id}/`; })
+        .call(d3.drag()
+          .on('start', (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+          .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+          .on('end', (event, d) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+        );
+
+      node.append('circle').attr('r', 30)
+        .attr('fill', d => d.type === 'main' ? '#5d87ff' : d.type === 'upstream' ? '#00c292' : '#fec90f')
+        .attr('stroke', '#fff').attr('stroke-width', 3);
+
+      node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em')
+        .attr('fill', 'white').attr('font-size', '9px').attr('font-weight', '700')
+        .each(function(d) {
+          const words = d.name.split(' ');
+          const el = d3.select(this);
+          if (words.length <= 2) {
+            el.text(d.name.length > 10 ? d.name.substring(0, 10) + '...' : d.name);
+          } else {
+            el.append('tspan').attr('x', 0).attr('dy', '-0.6em').text(words.slice(0, 2).join(' '));
+            el.append('tspan').attr('x', 0).attr('dy', '1.2em').text(words.slice(2).join(' '));
+          }
+        });
+
+      const legend = svg.append('g').attr('transform', `translate(${width - 160}, 20)`);
+      [['Main Team', '#5d87ff'], ['Upstream', '#00c292'], ['Downstream', '#fec90f']].forEach(([label, color], i) => {
+        legend.append('circle').attr('cx', 10).attr('cy', i * 25).attr('r', 8).attr('fill', color);
+        legend.append('text').attr('x', 25).attr('y', i * 25 + 5).attr('font-size', '12px').attr('fill', '#5a6a85').attr('font-weight', '600').text(label);
+      });
+
+      simulation.on('tick', () => {
+        link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+        node.attr('transform', d => `translate(${d.x},${d.y})`);
+      });
+    </script>
   </body>
 </html>

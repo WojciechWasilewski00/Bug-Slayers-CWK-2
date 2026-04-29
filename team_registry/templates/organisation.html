@@ -1,0 +1,118 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organisation | Bug Slayers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root { --sidebar-bg: #ffffff; --sidebar-text: #5a6a85; --accent-color: #5d87ff; --body-bg: #f4f7f6; }
+      body { background-color: var(--body-bg); display: flex; min-height: 100vh; margin: 0; font-family: "Plus Jakarta Sans", sans-serif; }
+      .sidebar { width: 270px; background-color: var(--sidebar-bg); position: fixed; height: 100vh; border-right: 1px solid #eef2f6; display: flex; flex-direction: column; z-index: 1050; }
+      .sidebar-brand { padding: 25px; display: flex; justify-content: center; align-items: center; min-height: 100px; text-decoration: none; }
+      .brand-logo { max-width: 180px; max-height: 70px; width: auto; height: auto; display: block; object-fit: contain; }
+      .nav-section-title { font-size: 0.7rem; font-weight: 700; color: #2a3547; text-transform: uppercase; padding: 10px 25px; margin-top: 15px; letter-spacing: 1px; opacity: 0.8; }
+      .sidebar a { padding: 12px 20px; margin: 2px 15px; display: flex; align-items: center; color: var(--sidebar-text); text-decoration: none; font-weight: 500; font-size: 0.95rem; border-radius: 7px; transition: all 0.2s; }
+      .sidebar a:hover, .sidebar a.active { background-color: #ecf2ff; color: var(--accent-color); font-weight: 600; }
+      .icon-wrapper { width: 30px; font-size: 1.1rem; }
+      .main-wrapper { margin-left: 270px; flex-grow: 1; width: calc(100% - 270px); display: flex; flex-direction: column; }
+      .top-nav-bar { background: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eef2f6; position: sticky; top: 0; z-index: 998; }
+      .top-nav-links a { text-decoration: none; color: var(--sidebar-text); font-weight: 600; font-size: 0.9rem; margin-right: 25px; }
+      .main-content { padding: 40px; }
+      .dept-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
+      .dept-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0f4ff; }
+      .dept-title { font-size: 1.2rem; font-weight: 800; color: #2a3547; }
+      .dept-badge { background: #ecf2ff; color: var(--accent-color); border-radius: 20px; padding: 4px 14px; font-size: 0.8rem; font-weight: 700; }
+      .team-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 10px; margin-bottom: 8px; background: #f8faff; border: 1px solid #eef2f6; transition: all 0.2s; }
+      .team-row:hover { background: #ecf2ff; border-color: #d1e1ff; }
+      .team-name { font-weight: 700; color: #2a3547; font-size: 0.95rem; }
+      .team-lead { font-size: 0.8rem; color: #8a99b5; }
+      .dep-section { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+      .dep-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; margin-bottom: 8px; background: #f8faff; border: 1px solid #eef2f6; }
+      .arrow { color: var(--accent-color); font-weight: 800; font-size: 1.2rem; }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="{% url 'dashboard' %}" class="sidebar-brand">
+        <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
+      </a>
+      <div class="flex-grow-1">
+        <a href="{% url 'dashboard' %}"><span class="icon-wrapper">🏠</span> Dashboard</a>
+        <a href="{% url 'team_page' %}"><span class="icon-wrapper">👥</span> Teams</a>
+        <a href="{% url 'organisation' %}" class="active"><span class="icon-wrapper">🏢</span> Organisation</a>
+        <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
+        <a href="{% url 'scheduling:weekly_schedule' %}"><span class="icon-wrapper">📅</span> Schedule</a>
+        <a href="{% url 'inbox' %}"><span class="icon-wrapper">📩</span> Messages</a>
+      </div>
+      <div class="mt-auto border-top pt-2 pb-3">
+        <div class="nav-section-title">Administration</div>
+        <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
+        <a href="/admin/" target="_blank"><span class="icon-wrapper">🛡️</span> Admin Panel</a>
+      </div>
+    </div>
+    <div class="main-wrapper">
+      <nav class="top-nav-bar">
+        <div class="top-nav-links">
+          <a href="{% url 'dashboard' %}">Home</a>
+          <a href="#">Service</a>
+          <a href="#">Portfolio</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="topbar-right">
+          {% if user.is_authenticated %}
+          <span class="me-3">Hello, <strong>{{ user.username }}</strong></span>
+          <form action="{% url 'logout' %}" method="post" style="display:inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+          </form>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
+          {% endif %}
+        </div>
+      </nav>
+      <div class="main-content">
+        <h2 class="fw-bold mb-1 text-dark">Organisation Overview</h2>
+        <p class="text-muted mb-4">All departments and their teams across the organisation.</p>
+        {% for dept_name, teams in departments.items %}
+        <div class="dept-card">
+          <div class="dept-header">
+            <div>
+              <span class="dept-title">🏢 {{ dept_name }}</span>
+              {% if teams.0.dept_head_name %}
+              <div class="text-muted small mt-1">Head: <strong>{{ teams.0.dept_head_name }}</strong></div>
+              {% endif %}
+            </div>
+            <span class="dept-badge">{{ teams|length }} team{{ teams|length|pluralize }}</span>
+          </div>
+          {% for team in teams %}
+          <div class="team-row">
+            <div>
+              <div class="team-name">{{ team.team_name }}</div>
+              <div class="team-lead">{% if team.team_lead_name %}Lead: {{ team.team_lead_name }}{% endif %}</div>
+            </div>
+            <a href="{% url 'team_detail' team.pk %}" class="btn btn-sm btn-outline-primary fw-bold">View →</a>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="dep-section mt-4">
+          <h5 class="fw-bold text-dark mb-4">🔗 Team Dependencies</h5>
+          {% for dep in all_dependencies %}
+          <div class="dep-row">
+            <a href="{% url 'team_detail' dep.from_team.pk %}" class="text-decoration-none fw-bold text-dark">{{ dep.from_team.team_name }}</a>
+            <span class="arrow">→</span>
+            <a href="{% url 'team_detail' dep.to_team.pk %}" class="text-decoration-none fw-bold text-dark">{{ dep.to_team.team_name }}</a>
+            <span class="badge {% if dep.dependency_type == 'upstream' %}bg-info{% else %}bg-warning{% endif %} ms-auto">{{ dep.dependency_type|upper }}</span>
+          </div>
+          {% empty %}
+          <p class="text-muted">No dependencies recorded.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
