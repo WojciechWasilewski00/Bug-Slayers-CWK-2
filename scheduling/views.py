@@ -11,15 +11,13 @@ def dashboard(request):
     return render(request, 'scheduling/dashboard.html')
 
 # 2. The Add Meeting View (for your button)
-def add_meeting(request):
-    return render(request, 'scheduling/add_meeting.html')
+def create_meeting(request):
+    return render(request, 'scheduling/schedule_form.html')
 
 # 3. Add placeholders for your other URLs so they don't crash
 def weekly_schedule(request):
-    return render(request, 'scheduling/weekly_schedule.html')
-
-def schedule_meeting(request):
-    return render(request, 'scheduling/schedule_form.html')
+    meetings = Meeting.objects.all() 
+    return render(request, 'scheduling/weekly_schedule.html', {'meetings': meetings})
 
 def meeting_detail(request, pk):
     return render(request, 'scheduling/meeting_detail.html')

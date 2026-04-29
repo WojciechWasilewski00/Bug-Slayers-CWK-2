@@ -7,7 +7,7 @@ def home_redirect(request):
 
 # This handles the dashboard URL (127.0.0.1:8000/dashboard/)
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'scheduling/dashboard.html')
 
 # THis handles the teams URL (127.0.0.1:8000/teams/)
 def team_page_view(request):

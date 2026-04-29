@@ -148,44 +148,64 @@
     </style>
   </head>
   <body>
-    <body>
-      <body>
-        <div class="sidebar">
-          <div class="sidebar-brand">
-            <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo">
-          </div>
-          
-          <div class="flex-grow-1">
-            <a href="{% url 'scheduling:dashboard' %}">
-              <span class="icon-wrapper">🏠</span> Dashboard
-            </a>
-          
-            <a href="{% url 'team_page' %}">
-              <span class="icon-wrapper">👥</span> Teams
-            </a>
-            
-            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-          
-            <a href="{% url 'scheduling:weekly_schedule' %}">
-              <span class="icon-wrapper">📅</span> Schedule
-            </a>
-          
-            <a href="{% url 'inbox' %}">
-              <span class="icon-wrapper">📩</span> Messages
-            </a>
-          </div>
+<<<<<<< HEAD
+    <div class="main-content">
+      {% block content %}{% endblock %}
+  </div>
 
-      
-          <div class="logout-section">
-              <form action="{% url 'logout' %}" method="post" style="margin:0;">
-                  {% csrf_token %}
-                  <button type="submit" class="logout-btn">🚪 Logout</button>
-              </form>
-          </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+      window.onload = function() {
+          if (typeof bootstrap !== 'undefined') {
+              console.log("Bootstrap JS is loaded and ready!");
+          } else {
+              console.error("Bootstrap JS FAILED to load. The modal won't work.");
+          }
+      };
+  </script>
+</body>
+</html>
+=======
+
+    <div class="sidebar">
+      <div class="brand"><span>BUG</span>SLAYERS</div>
+
+      <nav class="nav-list">
+        <div class="nav-section-title">Home</div>
+        <div class="nav-item">
+          <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
         </div>
 
-    <div class="main-content">
-        {% block content %}{% endblock %}
+        <div class="nav-section-title">Team Management</div>
+        <div class="nav-item">
+          <a href="{% url 'team_page' %}" class="nav-link">👥 Teams</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
+        </div>
+
+        <div class="nav-section-title">Apps</div>
+        <div class="nav-item">
+          <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
+        </div>
+
+        <div class="nav-item">
+         <a href="/reports/" class="nav-link">📊 Reports</a>
+        </div>
+      </nav>
+
+      <div class="logout-form">
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
     </div>
+
+    <div class="main-content">{% block content %} {% endblock %}</div>
   </body>
 </html>
+>>>>>>> bea7497 (Fixed reports)
