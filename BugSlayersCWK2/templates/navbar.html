@@ -13,7 +13,6 @@
     <a href="{% url 'organisation' %}" {% if request.resolver_match.url_name == 'organisation' %}class="active"{% endif %}>
       <span class="icon-wrapper">🏢</span> Organisation
     </a>
-    <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
     <a href="{% url 'scheduling:weekly_schedule' %}" {% if request.resolver_match.url_name == 'weekly_schedule' %}class="active"{% endif %}>
       <span class="icon-wrapper">📅</span> Schedule
     </a>
