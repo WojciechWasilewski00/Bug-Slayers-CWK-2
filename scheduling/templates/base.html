@@ -150,8 +150,9 @@
   <body>
     <body>
       <body>
-        <div class="sidebar">
-          <div class="sidebar-brand">
+        
+        {% include 'navbar.html' %}
+          {<div class="sidebar-brand">}
             <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo">
           </div>
           
@@ -182,7 +183,7 @@
                   <button type="submit" class="logout-btn">🚪 Logout</button>
               </form>
           </div>
-        </div>
+        
 
     <div class="main-content">
         {% block content %}{% endblock %}
