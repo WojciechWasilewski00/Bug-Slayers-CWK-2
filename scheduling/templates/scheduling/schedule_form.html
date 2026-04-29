@@ -21,7 +21,7 @@
                         {% endfor %}
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                            <a href="{% url 'weekly_schedule' %}" class="btn btn-light px-4">Cancel</a>
+                            <a href="{% url 'scheduling:weekly_schedule' %}" class="btn btn-light px-4">Cancel</a>
                             <button type="submit" class="btn btn-primary px-5" style="background-color: #0095ff; border: none;">
                                 {% if edit_mode %}Save Changes{% else %}Create Meeting{% endif %}
                             </button>

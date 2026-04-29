@@ -6,11 +6,10 @@ app_name = 'scheduling'
 
 urlpatterns = [
     # Dashboard - The main view for your individual element
-    path('', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     
     # Creation logic
-    path('add/', views.add_meeting, name='add_meeting'),
-    path('create/', views.schedule_meeting, name='schedule_meeting'),
+    path('add/', views.create_meeting, name='create_meeting'),
     
     # Schedule views
     path('schedule/', views.weekly_schedule, name='weekly_schedule'),

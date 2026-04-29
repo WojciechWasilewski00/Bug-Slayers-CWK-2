@@ -1,63 +1,31 @@
 {% load static %}
-
 <div class="sidebar">
-
-  <a href="{% url 'dashboard' %}" class="sidebar-brand">
-
+  <a href="{% url 'scheduling:dashboard' %}" class="sidebar-brand">
     <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
-
   </a>
-
   <div class="flex-grow-1">
-
-    <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>
-
+    <a href="{% url 'scheduling:dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>
       <span class="icon-wrapper">🏠</span> Dashboard
-
     </a>
-
     <a href="{% url 'team_page' %}" {% if request.resolver_match.url_name == 'team_page' %}class="active"{% endif %}>
-
       <span class="icon-wrapper">👥</span> Teams
-
     </a>
-
     <a href="{% url 'organisation' %}" {% if request.resolver_match.url_name == 'organisation' %}class="active"{% endif %}>
-
       <span class="icon-wrapper">🏢</span> Organisation
-
     </a>
-
-    <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-
     <a href="{% url 'scheduling:weekly_schedule' %}" {% if request.resolver_match.url_name == 'weekly_schedule' %}class="active"{% endif %}>
-
       <span class="icon-wrapper">📅</span> Schedule
-
     </a>
-
     <a href="{% url 'inbox' %}" {% if request.resolver_match.url_name == 'inbox' %}class="active"{% endif %}>
-
       <span class="icon-wrapper">📩</span> Messages
-
     </a>
-
     <a href="{% url 'reports' %}" {% if request.resolver_match.url_name == 'reports' %}class="active"{% endif %}>
-
       <span class="icon-wrapper">📊</span> Reports
-
     </a>
-
   </div>
-
   <div class="mt-auto border-top pt-2 pb-3">
-
     <div class="nav-section-title">Administration</div>
-
     <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-
     <a href="/admin/" target="_blank"><span class="icon-wrapper">🛡️</span> Admin Panel</a>
-
   </div>
-
 </div>

@@ -148,10 +148,19 @@
     </style>
   </head>
   <body>
-    
-        {% include 'navbar.html' %}
     <div class="main-content">
-        {% block content %}{% endblock %}
-    </div>
-  </body>
+      {% block content %}{% endblock %}
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+      window.onload = function() {
+          if (typeof bootstrap !== 'undefined') {
+              console.log("Bootstrap JS is loaded and ready!");
+          } else {
+              console.error("Bootstrap JS FAILED to load. The modal won't work.");
+          }
+      };
+  </script>
+</body>
 </html>
