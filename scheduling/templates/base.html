@@ -148,43 +148,8 @@
     </style>
   </head>
   <body>
-    <body>
-      <body>
-        
+    
         {% include 'navbar.html' %}
-          {<div class="sidebar-brand">}
-            <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo">
-          </div>
-          
-          <div class="flex-grow-1">
-            <a href="{% url 'scheduling:dashboard' %}">
-              <span class="icon-wrapper">🏠</span> Dashboard
-            </a>
-          
-            <a href="{% url 'team_page' %}">
-              <span class="icon-wrapper">👥</span> Teams
-            </a>
-            
-            <a href="#"><span class="icon-wrapper">📂</span> Documents</a>
-          
-            <a href="{% url 'scheduling:weekly_schedule' %}">
-              <span class="icon-wrapper">📅</span> Schedule
-            </a>
-          
-            <a href="{% url 'inbox' %}">
-              <span class="icon-wrapper">📩</span> Messages
-            </a>
-          </div>
-
-      
-          <div class="logout-section">
-              <form action="{% url 'logout' %}" method="post" style="margin:0;">
-                  {% csrf_token %}
-                  <button type="submit" class="logout-btn">🚪 Logout</button>
-              </form>
-          </div>
-        
-
     <div class="main-content">
         {% block content %}{% endblock %}
     </div>
