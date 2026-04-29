@@ -15,7 +15,9 @@ It shows the message subject, team, content, and date, and includes an empty sta
 {% for msg in messages %}
 <!-- Loop through each message passed from the backend (views.py) -->
     <div class="message-card">
+        <!-- Displays the name  of the message -->
         <p><strong>From:</strong>{{msg.sender.username}}</p>
+        <!-- Displays the email of the message -->
         <p><strong>Email:</strong>{{msg.sender.email}}</p>
         <!-- Container for each individual message -->
         <h3>{{ msg.message_subject }}</h3>
