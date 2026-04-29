@@ -35,7 +35,7 @@ The application includes the following modules:
 | Jayne | Scheduling (Meetings) |
 | Felipe | Voting / Sessions |
 | Mariam | [Add module] |
-| Heidi | [Add module] |
+| Heidi | Reports Page |
 | Wojciech | Teams Page|
 
 Each member is responsible for:
