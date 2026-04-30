@@ -148,6 +148,7 @@
     </style>
   </head>
   <body>
+<<<<<<< HEAD
     <div class="main-content">
       {% block content %}{% endblock %}
   </div>
@@ -164,3 +165,47 @@
   </script>
 </body>
 </html>
+=======
+
+    <div class="sidebar">
+      <div class="brand"><span>BUG</span>SLAYERS</div>
+
+      <nav class="nav-list">
+        <div class="nav-section-title">Home</div>
+        <div class="nav-item">
+          <a href="{% url 'dashboard' %}" class="nav-link">🏠 Dashboard</a>
+        </div>
+
+        <div class="nav-section-title">Team Management</div>
+        <div class="nav-item">
+          <a href="{% url 'team_page' %}" class="nav-link">👥 Teams</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'registry_home' %}" class="nav-link">📋 Registry</a>
+        </div>
+
+        <div class="nav-section-title">Apps</div>
+        <div class="nav-item">
+          <a href="{% url 'weekly_schedule' %}" class="nav-link">📅 Schedule</a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'inbox' %}" class="nav-link">📩 Messages</a>
+        </div>
+
+        <div class="nav-item">
+         <a href="/reports/" class="nav-link">📊 Reports</a>
+        </div>
+      </nav>
+
+      <div class="logout-form">
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="main-content">{% block content %} {% endblock %}</div>
+  </body>
+</html>
+>>>>>>> bea7497 (Fixed reports)
