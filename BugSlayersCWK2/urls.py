@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views  # Ensure you have dashboard_view and home_redirect in your project's views.py
 
+
 urlpatterns = [
     # 1. Admin Panel
     path('admin/', admin.site.urls),
     
     # 2. Authentication (Login/Logout)
     # This provides: /accounts/login/ and /accounts/logout/
+   
     path('accounts/', include('django.contrib.auth.urls')), 
    
 

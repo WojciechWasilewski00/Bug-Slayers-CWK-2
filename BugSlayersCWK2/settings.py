@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'scheduling',  # Jayne's app
     'messagesapp', # Mariam' s app
     'reports', #Heidi's app
+    
 ]
 
 MIDDLEWARE = [

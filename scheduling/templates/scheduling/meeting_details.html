@@ -1,0 +1,79 @@
+{% extends "scheduling/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <!-- The "Bubble" Detail Card -->
+            <div class="card shadow-sm border-0" style="border-radius: 20px; background-color: #ffffff;">
+                
+                <div class="card-body p-5">
+                    
+                    <!-- Subject as Heading -->
+                    <h1 class="fw-bold mb-4" style="color: #1a2b4b;">{{ meeting.subject }}</h1>
+                    
+                    <div class="meeting-info fs-5">
+                        <!-- Each detail on its own line -->
+                        <div class="mb-3">
+                            <span class="text-uppercase fw-bold small text-muted d-block">Platform</span>
+                            {{ meeting.platform|default:"Not specified" }}
+                        </div>
+
+                        <div class="mb-3">
+                            <span class="text-uppercase fw-bold small text-muted d-block">Team</span>
+                            {{ meeting.team }}
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="text-muted small text-uppercase fw-bold">Date & Time</label>
+                            <p class="fs-5">📅 {{ meeting.date_time|date:"l, d F Y - H:i" }}</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-uppercase fw-bold small text-muted d-block">Description / Agenda</span>
+                            <div class="p-3 bg-light rounded shadow-inner" style="min-height: 150px; border-left: 4px solid #0d6efd;">
+                                {{ meeting.description|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Buttons at the bottom -->
+                    <div class="card-footer bg-white py-3 border-top d-flex justify-content-between">
+                        
+                        <a href="{% url 'scheduling:edit_meeting' meeting.id %}" class="btn btn-warning px-4 fw-bold">Edit</a>
+                        
+                        <form action="{% url 'scheduling:delete_meeting' meeting.id %}" method="POST" class="m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger px-4 fw-bold" onclick="return confirm('Delete this meeting permanently?')">Delete</button>
+                        </form>
+                        
+                        <a href="{% url 'scheduling:weekly_schedule' %}" class="btn btn-outline-secondary ms-auto">Back to List</a>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm bg-primary text-white">
+                            <div class="card-body p-4">
+                                <h5>Meeting Status</h5>
+                                <p class="small opacity-75">This meeting is currently active in the schedule.</p>
+                                <hr class="opacity-25">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            👤
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>                  
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

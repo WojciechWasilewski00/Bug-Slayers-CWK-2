@@ -16,10 +16,9 @@ urlpatterns = [
     
     # Dynamic Routing for specific meetings (Detail, Edit, Delete)
     # Using <int:pk> ensures the logic targets specific database records
-    path('meeting/<int:pk>/', views.meeting_detail, name='meeting_detail'),
-    path('meeting/<int:pk>/edit/', views.edit_meeting, name='edit_meeting'),
-    path('meeting/<int:pk>/delete/', views.delete_meeting, name='delete_meeting'),
+    path('meeting/<int:meeting_id>/', views.meeting_details, name='meeting_details'),
+    path('edit/<int:meeting_id>/', views.edit_meeting, name='edit_meeting'),
+    path('delete/<int:meeting_id>/', views.delete_meeting, name='delete_meeting'), 
     
-    # Integration with group authentication system
     path('accounts/', include('django.contrib.auth.urls')),
 ]

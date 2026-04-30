@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.utils import timezone
 from datetime import timedelta
 from .models import Meeting
@@ -30,11 +30,23 @@ def weekly_schedule(request):
         'teams': teams,
     })
     
-def meeting_detail(request, pk):
-    return render(request, 'scheduling/meeting_detail.html')
+def meeting_details(request, meeting_id):
+    meeting = get_object_or_404(Meeting, id=meeting_id)
+    return render(request, 'scheduling/meeting_details.html', {'meeting': meeting})
 
-def edit_meeting(request, pk):
-    return render(request, 'scheduling/edit_form.html')
+def edit_meeting(request, meeting_id): # Match the URL variable name
+    meeting = get_object_or_404(Meeting, id=meeting_id)
+    if request.method == 'POST':
+        form = MeetingForm(request.POST, instance=meeting)
+        if form.is_valid():
+            form.save()
+            return redirect('scheduling:weekly_schedule')
+    else:
+        form = MeetingForm(instance=meeting)
+    return render(request, 'scheduling/schedule_form.html', {'form': form, 'edit_mode': True})
 
-def delete_meeting(request, pk):
-    return render(request, 'scheduling/delete_confirm.html')
+def delete_meeting(request, meeting_id):
+    meeting = get_object_or_404(Meeting, id=meeting_id)
+    if request.method == "POST":
+        meeting.delete()
+    return redirect('scheduling:weekly_schedule')
