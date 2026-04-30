@@ -1,11 +1,13 @@
 {% load static %}
 <div class="sidebar">
+  <!-- Sidebar Brand / Logo -->
   <a href="{% url 'scheduling:dashboard' %}" class="sidebar-brand">
     <img src="{% static 'logo/logo.png' %}" alt="Logo" class="brand-logo" />
   </a>
 
+  <!-- Core Navigation Links -->
   <div class="flex-grow-1">
-    <a href="{% url 'scheduling:dashboard' %}" 
+    <a href="{% url 'scheduling:dashboard' %}"
        class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
       <span class="icon-wrapper">🏠</span> Dashboard
     </a>
@@ -36,9 +38,16 @@
     </a>
   </div>
 
+  <!-- Administration Section -->
   <div class="mt-auto border-top pt-2 pb-3">
     <div class="nav-section-title">Administration</div>
-    <a href="#"><span class="icon-wrapper">⚙️</span> Settings</a>
-    <a href="/admin/" target="_blank"><span class="icon-wrapper">🛡️</span> Admin Panel</a>
+
+    <a href="#">
+      <span class="icon-wrapper">⚙️</span> Settings
+    </a>
+
+    <a href="/admin/" target="_blank">
+      <span class="icon-wrapper">🛡️</span> Admin Panel
+    </a>
   </div>
 </div>

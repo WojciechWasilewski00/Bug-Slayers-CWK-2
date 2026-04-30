@@ -9,6 +9,22 @@ from reportlab.platypus import SimpleDocTemplate, Table
 from reportlab.lib import colors
 
 
+def reports_dashboard(request):
+    query = request.GET.get('search')
+
+    teams = Team.objects.all()
+
+    if query:
+        teams = teams.filter(team_name__icontains=query)
+
+    total_teams = teams.count()
+
+    return render(request, 'reports.html', {
+        'teams': teams,
+        'total_teams': total_teams,
+        'query': query
+    })
+
 # 🔹 Reports Dashboard
 def reports_dashboard(request):
     teams = Team.objects.all()
@@ -33,7 +49,7 @@ def export_excel(request):
     writer.writerow(['Team'])
 
     for team in Team.objects.all():
-        writer.writerow([team.name])
+        writer.writerow([team.team_name])
 
     return response
 
@@ -48,7 +64,7 @@ def export_pdf(request):
     data = [['Team']]
 
     for team in Team.objects.all():
-        data.append([team.name])
+        data.append([team.team_name])
 
     table = Table(data)
 

@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Bug Slayers{% endblock %}</title>
+  <title>{% block title %}Weekly Schedule | Sky{% endblock %}</title>
 
-  <!-- Bootstrap & Font -->
+  <!-- Bootstrap & Google Font -->
   <link href="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css)" rel="stylesheet" />
   <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap)" rel="stylesheet" />
 
@@ -26,6 +26,7 @@
       background-color: var(--body-bg);
       font-family: "Plus Jakarta Sans", sans-serif;
       color: #2a3547;
+      overflow-x: hidden;
     }
 
     /* ---------- SIDEBAR ---------- */
@@ -55,8 +56,8 @@
       max-height: 70px;
       width: auto;
       height: auto;
-      object-fit: contain;
       display: block;
+      object-fit: contain;
       margin: 0 auto;
     }
 
@@ -97,7 +98,7 @@
 
     /* ---------- MAIN WRAPPER ---------- */
     .main-wrapper {
-      margin-left: 270px;
+      margin-left: 270px;               /* leave space for sidebar */
       flex-grow: 1;
       width: calc(100% - 270px);
       display: flex;
@@ -126,6 +127,7 @@
       font-size: 0.9rem;
       margin-right: 25px;
     }
+
     /* ---------- PAGE CONTENT ---------- */
     .content-padding {
       padding: 40px;
@@ -136,8 +138,7 @@
 </head>
 
 <body>
-  <!-- Include sidebar -->
-  {% include 'navbar.html' %}
+  {% include 'navbar.html' %}   <!-- fixed sidebar -->
 
   <div class="main-wrapper">
     <nav class="top-nav-bar">
