@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'scheduling/base.html' %}
+
 {% load static %}
 
 {% block content %}
@@ -8,24 +9,10 @@
             <h2 class="fw-bold text-dark mb-1">Weekly Schedule</h2>
             <p class="text-muted">Manage and view your team's upcoming engagements.</p>
         </div>
-        <button type="button" class="btn btn-primary shadow-sm px-4" 
-                data-bs-toggle="modal" 
-                data-bs-target="#newMeetingModal"
-                style="position: relative; z-index: 10;">
+        <a href="{% url 'scheduling:create_meeting' %}" class="btn btn-primary">
             + New Meeting
-        </button>
-        <script>
-            document.querySelector('[data-bs-target="#newMeetingModal"]').addEventListener('click', function() {
-                console.log("Attempting to force open modal...");
-                try {
-                    var myModal = new bootstrap.Modal(document.getElementById('newMeetingModal'));
-                    myModal.show();
-                } catch (err) {
-                    console.error("Bootstrap is not loading correctly: ", err);
-                    alert("Bootstrap Error: Please check your base.html script link.");
-                }
-            });
-        </script>
+        </a>
+        
     </div>
 
     <div class="card shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
@@ -47,49 +34,62 @@
                         {% for meeting in meetings %}
                         <tr>
                             <td class="ps-4 fw-bold text-dark">{{ meeting.subject }}</td>
-                            <td>{{ meeting.date }} at {{ meeting.time }}</td>
+                            📅 {{ meeting.date_time|date:"l, d F Y - H:i" }}
                             <td><span class="badge bg-primary-subtle text-primary">{{ meeting.team }}</span></td>
+                            <td>{{ meeting.location }}</td>
                             <td class="text-end pe-4">
                                 <button class="btn btn-sm btn-light">Edit</button>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="4" class="text-center py-5 text-muted">
+                            <td colspan="5" class="text-center py-5 text-muted">
                                 <div class="mb-2">📅</div>
                                 No meetings found. Click "+ New Meeting" to get started.
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
+                    
                 </table>
             </div>
         </div>
     </div>
 </div> 
-<div class="modal fade" id="newMeetingModal" data-bs-backdrop="static" tabindex="-1">
+<div class="modal fade" id="newMeetingModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 15px; border: none; shadow: 0 10px 30px rgba(0,0,0,0.1);">
             <div class="modal-header border-0 pt-4 px-4">
                 <h5 class="modal-title fw-bold" id="newMeetingModalLabel">Schedule a New Meeting</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <form method="post" action="{% url 'scheduling:create_meeting' %}">
                 {% csrf_token %}
                 <div class="modal-body px-4">
                     <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">Meeting Title</label>
-                        <input type="text" name="subject" class="form-control" placeholder="e.g. Marketing Sync" required>
+                        <label class="form-label small fw-bold text-muted">Team</label>
+                        <select name="team" class="form-select" required>
+                            {% for team in teams %}
+                                <option value="{{ team.id }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold text-muted">Date</label>
-                            <input type="date" name="date" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold text-muted">Time</label>
-                            <input type="time" name="time" class="form-control" required>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Title</label>
+                        <input type="text" name="subject" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Description</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Date & Time</label>
+                        <input type="datetime-local" name="date_time" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">Platform</label>
+                        <input type="text" name="platform" class="form-control" placeholder="Zoom, Teams, etc." />
                     </div>
                 </div>
                 <div class="modal-footer border-0 pb-4 px-4">
@@ -97,6 +97,7 @@
                     <button type="submit" class="btn btn-primary px-4">Create Meeting</button>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>

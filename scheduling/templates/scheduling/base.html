@@ -1,14 +1,14 @@
+<!-- SCHEDULING BASE -->
 {% load static %}
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Weekly Schedule | Sky{% endblock %}</title>
+  <title>{% block title %}Bug Slayers{% endblock %}</title>
 
-  <!-- Bootstrap & Google Font -->
-  <link href="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css)" rel="stylesheet" />
-  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap)" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -19,46 +19,39 @@
       --body-bg: #f4f7f6;
     }
 
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: var(--body-bg);
       font-family: "Plus Jakarta Sans", sans-serif;
-      color: #2a3547;
-      overflow-x: hidden;
     }
-
-    /* ---------- SIDEBAR ---------- */
-    .sidebar {
-      width: 270px;
-      background-color: var(--sidebar-bg);
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      border-right: 1px solid #eef2f6;
-      display: flex;
-      flex-direction: column;
-      z-index: 1000;
-    }
+    
 
     .sidebar-brand {
       padding: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      min-height: 100px;
+      text-decoration: none;
+      overflow: hidden;   /* ⬅ Prevents the logo from overflowing */
     }
-
-    .brand-logo {
-      max-width: 160px;
-      max-height: 70px;
-      width: auto;
+    
+    .sidebar {
+      width: 270px;
+      background-color: var(--sidebar-bg);
+      position: fixed;
+      height: 100vh;
+      border-right: 1px solid #eef2f6;
+      display: flex;
+      flex-direction: column;
+      z-index: 1050;
+    }
+    
+    .sidebar-logo {
+      max-width: 180px;
       height: auto;
       display: block;
-      object-fit: contain;
-      margin: 0 auto;
     }
 
     .sidebar a {
@@ -66,14 +59,14 @@
       margin: 2px 15px;
       display: flex;
       align-items: center;
-      border-radius: 7px;
       color: var(--sidebar-text);
       text-decoration: none;
+      border-radius: 7px;
       font-weight: 500;
-      transition: all 0.2s;
     }
 
     .sidebar a:hover,
+    
     .sidebar a.active {
       background-color: #ecf2ff;
       color: var(--accent-color);
@@ -85,30 +78,18 @@
       font-size: 1.1rem;
     }
 
-    .nav-section-title {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #2a3547;
-      text-transform: uppercase;
-      padding: 10px 25px;
-      margin-top: 15px;
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
-
-    /* ---------- MAIN WRAPPER ---------- */
     .main-wrapper {
-      margin-left: 270px;               /* leave space for sidebar */
+      margin-left: 270px;       
       flex-grow: 1;
       width: calc(100% - 270px);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
-
-    /* ---------- TOP NAV BAR ---------- */
+    
+    
     .top-nav-bar {
-      background: #ffffff;
+      background: #fff;
       padding: 15px 40px;
       display: flex;
       justify-content: space-between;
@@ -116,34 +97,42 @@
       border-bottom: 1px solid #eef2f6;
       position: sticky;
       top: 0;
-      margin-top: 0;
       z-index: 998;
+      margin-top: 0;
     }
 
     .top-nav-links a {
       text-decoration: none;
       color: var(--sidebar-text);
       font-weight: 600;
-      font-size: 0.9rem;
       margin-right: 25px;
     }
 
-    /* ---------- PAGE CONTENT ---------- */
     .content-padding {
       padding: 40px;
-      background-color: var(--body-bg);
-      flex-grow: 1;
     }
+
+    .mt-auto {
+      margin-top: auto;
+    }
+    
+    .brand-logo { 
+      max-width: 180px; 
+      max-height: 70px; 
+      width: auto; 
+      height: auto; 
+      display: block; 
+      object-fit: contain; }
+      
+    
   </style>
 </head>
-
 <body>
-  {% include 'navbar.html' %}   <!-- fixed sidebar -->
-
+  {% include 'navbar.html' %}
   <div class="main-wrapper">
     <nav class="top-nav-bar">
       <div class="top-nav-links">
-        <a href="{% url 'scheduling:dashboard' %}">Home</a>
+        <a href="{% url 'dashboard' %}">Home</a>
         <a href="#">Service</a>
         <a href="#">Portfolio</a>
         <a href="#">Contact</a>
@@ -151,7 +140,7 @@
 
       <div class="topbar-right">
         {% if user.is_authenticated %}
-          <span class="me-3">Hello, <strong>{{ user.username }}</strong></span>
+          <span>Hello, <strong>{{ user.username }}</strong></span>
           <form action="{% url 'logout' %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
@@ -166,7 +155,6 @@
       {% block content %}{% endblock %}
     </div>
   </div>
-
-  <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js)"></script>
 </body>
 </html>
+

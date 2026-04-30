@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Bug Slayers{% endblock %}</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Bootstrap & Font -->
+  <link href="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css)" rel="stylesheet" />
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap)" rel="stylesheet" />
 
   <style>
     :root {
@@ -18,14 +19,16 @@
       --body-bg: #f4f7f6;
     }
 
-    body {
-      background-color: var(--body-bg);
-      min-height: 100vh;
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: var(--body-bg);
       font-family: "Plus Jakarta Sans", sans-serif;
       color: #2a3547;
     }
 
+    /* ---------- SIDEBAR ---------- */
     .sidebar {
       width: 270px;
       background-color: var(--sidebar-bg);
@@ -40,16 +43,21 @@
     }
 
     .sidebar-brand {
-      padding: 22px;
+      padding: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
-    .sidebar-logo {
-      max-width: 180px;
+    .brand-logo {
+      max-width: 160px;
+      max-height: 70px;
+      width: auto;
       height: auto;
+      object-fit: contain;
       display: block;
+      margin: 0 auto;
     }
 
     .sidebar a {
@@ -57,10 +65,11 @@
       margin: 2px 15px;
       display: flex;
       align-items: center;
+      border-radius: 7px;
       color: var(--sidebar-text);
       text-decoration: none;
-      border-radius: 7px;
       font-weight: 500;
+      transition: all 0.2s;
     }
 
     .sidebar a:hover,
@@ -75,15 +84,30 @@
       font-size: 1.1rem;
     }
 
-    .main-content {
-      margin-left: 270px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .nav-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #2a3547;
+      text-transform: uppercase;
+      padding: 10px 25px;
+      margin-top: 15px;
+      letter-spacing: 1px;
+      opacity: 0.8;
     }
 
+    /* ---------- MAIN WRAPPER ---------- */
+    .main-wrapper {
+      margin-left: 270px;
+      flex-grow: 1;
+      width: calc(100% - 270px);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ---------- TOP NAV BAR ---------- */
     .top-nav-bar {
-      background: #fff;
+      background: #ffffff;
       padding: 15px 40px;
       display: flex;
       justify-content: space-between;
@@ -91,6 +115,7 @@
       border-bottom: 1px solid #eef2f6;
       position: sticky;
       top: 0;
+      margin-top: 0;
       z-index: 998;
     }
 
@@ -98,72 +123,27 @@
       text-decoration: none;
       color: var(--sidebar-text);
       font-weight: 600;
+      font-size: 0.9rem;
       margin-right: 25px;
     }
 
+    /* ---------- PAGE CONTENT ---------- */
     .content-padding {
       padding: 40px;
-    }
-
-    .nav-section-title{
-       font-size: 0.75rem;
-        font-weight: 700;
-        color: #5a6a85;
-        text-transform: uppercase;
-        padding: 15px 25px 5px;
-    }
-
-    .mt-auto {
-      margin-top: auto;
+      background-color: var(--body-bg);
+      flex-grow: 1;
     }
   </style>
 </head>
 
-
 <body>
-  <div class="sidebar">
-    <div class="sidebar-brand">
-      <img src="{% static 'logo/logo.png' %}" alt="Logo" class="sidebar-logo">
-    </div>
+  <!-- Include sidebar -->
+  {% include 'navbar.html' %}
 
-    <div class="flex-grow-1">
-      <a href="{% url 'dashboard' %}">
-        <span class="icon-wrapper">🏠</span> Dashboard
-      </a>
-
-      <a href="{% url 'team_page' %}">
-        <span class="icon-wrapper">👥</span> Teams
-      </a>
-      <a href="{% url 'organisation' %}"><span class="icon-wrapper">🏢</span> Organisation</a>
-
-      <a href="{% url 'scheduling:weekly_schedule' %}">
-        <span class="icon-wrapper">📅</span> Schedule
-      </a>
-      <a href="{% url 'inbox' %}">
-        <span class="icon-wrapper">📩</span> Messages
-      </a>
-      <a href="/reports/"><span class="icon-wrapper">📊</span> Reports</a>
-      
-    </div>
-
-    </div>
-
-  
-      <a href="#">
-        <span class="icon-wrapper">⚙️</span> Settings
-      </a>
-    </div>
-  </div>
-
-
-    </div>
-
-
-
-  <div class="main-content">
-    <div class="top-nav-bar">
+  <div class="main-wrapper">
+    <nav class="top-nav-bar">
       <div class="top-nav-links">
-        <a href="{% url 'dashboard' %}">Home</a>
+        <a href="{% url 'scheduling:dashboard' %}">Home</a>
         <a href="#">Service</a>
         <a href="#">Portfolio</a>
         <a href="#">Contact</a>
@@ -171,7 +151,7 @@
 
       <div class="topbar-right">
         {% if user.is_authenticated %}
-          <span>Hello, <strong>{{ user.username }}</strong></span>
+          <span class="me-3">Hello, <strong>{{ user.username }}</strong></span>
           <form action="{% url 'logout' %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
@@ -180,12 +160,13 @@
           <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Login</a>
         {% endif %}
       </div>
-    </div>
+    </nav>
 
     <div class="content-padding">
       {% block content %}{% endblock %}
     </div>
   </div>
+
+  <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js)"></script>
 </body>
 </html>
-
